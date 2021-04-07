@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class EthanPlayerController : MonoBehaviour
 {
     private Animator thisAnim;
     private Rigidbody rigid;
