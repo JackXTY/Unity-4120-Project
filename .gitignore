@@ -71,3 +71,13 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 .vscode/*
+
+/Assets/unity-chan!/unity-chan! Model/Audio/*
+/Assets/unity-chan!/unity-chan! Model/Documentation/*
+/Assets/unity-chan!/unity-chan! Model/Editor/*
+/Assets/unity-chan!/unity-chan! Model/Scenes/*
+/Assets/unity-chan!/unity-chan! Model/SplashScreen/*
+/Assets/unity-chan!/unity-chan! Model/Art/UnityChanShader/*
+/Assets/unity-chan!/unity-chan! Model/Art/Animations/FaceAnimation/*
+/Assets/unity-chan!/unity-chan! Model/Art/Stage/*
+/Assets/unity-chan!/unity-chan! Model/Scripts/*
