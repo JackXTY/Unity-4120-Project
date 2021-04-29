@@ -35,6 +35,9 @@ public class InterfaceController : MonoBehaviour
     public bool in_settings;
     public bool in_game_menu;
 
+    public Image HPBarFill;
+    public Image StaminaBarFill;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -266,6 +269,10 @@ public class InterfaceController : MonoBehaviour
     {
         int damage_point = 10;
         health -= damage_point;
+        //HPBarFill.fillAmount = (float)health / max_health;
+        HPBarFill.GetComponent<BarChange>().ChangeTo((float)health / max_health);
+        HPBarFill.GetComponentInChildren<Flash>().StartFlash();
+        
         SetInterfaceColor();
         if(health <= 0)
         {
