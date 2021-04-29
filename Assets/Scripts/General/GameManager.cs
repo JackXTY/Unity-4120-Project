@@ -4,15 +4,52 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static GameManager Instance;
+
+    public List<Item> possessed_items;
+    public List<int> item_count;
+
+    public void Awake()
     {
-        
+        if(Instance == null)
+        {
+            Instance = this;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UseItem(Item item)
     {
-        
+        switch (item.usage)
+        {
+            case "heal":
+                InterfaceController.Instance.Heal((int) item.usage_value);
+                ConsumeItem(item);
+                break;
+        }
+    }
+
+    public void PickUpItem(Item item)
+    {
+        if (possessed_items.Contains(item))
+        {
+            int index = possessed_items.IndexOf(item);
+            item_count[index]++;
+        }
+        else
+        {
+            possessed_items.Add(item);
+            item_count.Add(1);
+        }
+    }
+
+    public void ConsumeItem(Item item)
+    {
+        int index = possessed_items.IndexOf(item);
+        item_count[index]--;
+        if(item_count[index] == 0)
+        {
+            possessed_items.RemoveAt(index);
+            item_count.RemoveAt(index);
+        }
     }
 }

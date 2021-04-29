@@ -73,10 +73,13 @@ public class FadeControl : MonoBehaviour
         {
             for (int i = 0; i <= images.Length - 1; i++)
             {
-                Color tmp = colors3[i];
-                tmp.a = 0;
-                images[i].GetComponent<Image>().color = tmp;
-                //gameObject.GetComponent<Image>().color = tmp;
+                if (images[i] != null)
+                {
+                    Color tmp = colors3[i];
+                    tmp.a = 0;
+                    images[i].GetComponent<Image>().color = tmp;
+                    //gameObject.GetComponent<Image>().color = tmp;
+                }
 
             }
 
@@ -136,11 +139,13 @@ public class FadeControl : MonoBehaviour
 
                 for (int i = 0; i <= images.Length - 1; i++)
                 {
-                    Color tmp = colors3[i];
-                    tmp.a = current * colors3[i].a;
-                    images[i].GetComponent<Image>().color = tmp;
-                    //gameObject.GetComponent<SpriteRenderer>().color = tmp;
-
+                    if (images[i] != null)
+                    {
+                        Color tmp = colors3[i];
+                        tmp.a = current * colors3[i].a;
+                        images[i].GetComponent<Image>().color = tmp;
+                        //gameObject.GetComponent<SpriteRenderer>().color = tmp;
+                    }
                 }
 
 
@@ -170,11 +175,13 @@ public class FadeControl : MonoBehaviour
 
                     for (int i = 0; i <= images.Length - 1; i++)
                     {
-                        Color tmp = colors3[i];
-                        tmp.a = current * colors3[i].a;
-                        images[i].GetComponent<Image>().color = tmp;
-                        //gameObject.GetComponent<SpriteRenderer>().color = tmp;
-
+                        if (images[i] != null)
+                        {
+                            Color tmp = colors3[i];
+                            tmp.a = current * colors3[i].a;
+                            images[i].GetComponent<Image>().color = tmp;
+                            //gameObject.GetComponent<SpriteRenderer>().color = tmp;
+                        }
                     }
                 }
             }
@@ -207,14 +214,16 @@ public class FadeControl : MonoBehaviour
 
                 for (int i = 0; i <= images.Length - 1; i++)
                 {
-                    if (isChild(images[i].gameObject))
+                    if (images[i] != null)
                     {
-                        Color tmp = colors3[i];
-                        tmp.a = current * colors3[i].a;
-                        images[i].GetComponent<Image>().color = tmp;
-                        //gameObject.GetComponent<SpriteRenderer>().color = tmp;
+                        if (isChild(images[i].gameObject))
+                        {
+                            Color tmp = colors3[i];
+                            tmp.a = current * colors3[i].a;
+                            images[i].GetComponent<Image>().color = tmp;
+                            //gameObject.GetComponent<SpriteRenderer>().color = tmp;
+                        }
                     }
-
                 }
 
 
@@ -250,14 +259,16 @@ public class FadeControl : MonoBehaviour
 
                     for (int i = 0; i <= images.Length - 1; i++)
                     {
-                        if (isChild(images[i].gameObject))
+                        if (images[i] != null)
                         {
-                            Color tmp = colors3[i];
-                            tmp.a = current * colors3[i].a;
-                            images[i].GetComponent<Image>().color = tmp;
-                            //gameObject.GetComponent<SpriteRenderer>().color = tmp;
+                            if (isChild(images[i].gameObject))
+                            {
+                                Color tmp = colors3[i];
+                                tmp.a = current * colors3[i].a;
+                                images[i].GetComponent<Image>().color = tmp;
+                                //gameObject.GetComponent<SpriteRenderer>().color = tmp;
+                            }
                         }
-
                     }
                 }
             }
@@ -357,20 +368,23 @@ public class FadeControl : MonoBehaviour
 
         for (int i = 0; i <= colors3.Length - 1; i++)
         {
-            Color new_c = images[i].GetComponent<Image>().color;
+            if (images[i] != null)
+            {
+                Color new_c = images[i].GetComponent<Image>().color;
 
-            if (colors3[i].a != 0f)
-            {
-                colors3[i] = new Color(new_c.r, new_c.g, new_c.b, colors3[i].a);
+                if (colors3[i].a != 0f)
+                {
+                    colors3[i] = new Color(new_c.r, new_c.g, new_c.b, colors3[i].a);
+                }
+                else
+                {
+                    colors3[i] = new_c;
+                }
+                //if (colors3[i].a == 0)
+                //{
+                //    colors3[i].a = 1f;
+                //}
             }
-            else
-            {
-                colors3[i] = new_c;
-            }
-            //if (colors3[i].a == 0)
-            //{
-            //    colors3[i].a = 1f;
-            //}
 
         }
         //Debug.Log("hi");

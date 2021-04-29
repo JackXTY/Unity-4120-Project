@@ -25,7 +25,7 @@ public class InterfaceController : MonoBehaviour
     public Image[] damage_aura;
     public GameObject scratch;
 
-    public GameObject general;
+    public List<GameObject> general;
     public GameObject settings;
     public GameObject game_menu;
 
@@ -43,8 +43,8 @@ public class InterfaceController : MonoBehaviour
     {
         if (Instance == null)   //singleton InterfaceController instance, easy for referencing in other scripts
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Instance = this;     //static reference
+            DontDestroyOnLoad(gameObject);    //won't be destroyed between scenes
         }
         else
         {
@@ -67,7 +67,11 @@ public class InterfaceController : MonoBehaviour
     public void OpenInterface()
     {
         SetInterfaceColor();
-        general.GetComponent<FadeControl>().StartFadeIn();
+        foreach(GameObject obj in general)
+        {
+            obj.GetComponent<FadeControl>().StartFadeIn();
+        }
+        //general.GetComponent<FadeControl>().StartFadeIn();
         Time.timeScale = 0;
         if (in_settings)
         {
@@ -84,7 +88,10 @@ public class InterfaceController : MonoBehaviour
     [ContextMenu("CloseInterface")]
     public void CloseInterface()
     {
-        general.GetComponent<FadeControl>().StartFadeOut();
+        foreach (GameObject obj in general)
+        {
+            obj.GetComponent<FadeControl>().StartFadeOut();
+        }
         if (in_settings)
         {
             in_settings = false;
@@ -264,8 +271,8 @@ public class InterfaceController : MonoBehaviour
         }
     }
    
-    [ContextMenu("damage")]
-    public void damage()
+    [ContextMenu("TestDamage")]
+    public void TestDamage()
     {
         int damage_point = 10;
         health -= damage_point;
@@ -280,6 +287,36 @@ public class InterfaceController : MonoBehaviour
         }
         damage_alpha = 0.24f;
         GameObject temp = Instantiate(scratch, damage_aura[0].transform.parent);
+    }
+
+    public void Damage(int damage_point)
+    {
+        //int damage_point = 10;
+        health -= damage_point;
+        //HPBarFill.fillAmount = (float)health / max_health;
+        HPBarFill.GetComponent<BarChange>().ChangeTo((float)health / max_health);
+        HPBarFill.GetComponentInChildren<Flash>().StartFlash();
+
+        SetInterfaceColor();
+        if (health <= 0)
+        {
+            die();
+        }
+        damage_alpha = 0.24f;
+        GameObject temp = Instantiate(scratch, damage_aura[0].transform.parent);
+    }
+
+    public void Heal(float heal_point)
+    {
+        //int damage_point = 10;
+        health += (int) heal_point;
+        if (health > max_health) health = max_health;
+        //HPBarFill.fillAmount = (float)health / max_health;
+        HPBarFill.GetComponent<BarChange>().ChangeTo((float)health / max_health);
+        HPBarFill.GetComponentInChildren<Flash>().StartFlash();
+
+        SetInterfaceColor();       
+        
     }
 
     public void ExitGame()
