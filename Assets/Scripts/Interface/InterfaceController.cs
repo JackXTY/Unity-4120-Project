@@ -32,6 +32,9 @@ public class InterfaceController : MonoBehaviour
     public GameObject weapon_prefab;
     public List<GameObject> weapon_list;
 
+    public GameObject item_prefab;
+    public List<GameObject> item_list;
+
     public bool in_settings;
     public bool in_game_menu;
 
@@ -106,6 +109,11 @@ public class InterfaceController : MonoBehaviour
                 weapon.GetComponent<FadeControl>().StartFadeOut();
                 Destroy(weapon, 0.5f);
             }
+            foreach (GameObject item in item_list)
+            {
+                item.GetComponent<FadeControl>().StartFadeOut();
+                Destroy(item, 0.5f);
+            }
             weapon_list.Clear();
         }
         Time.timeScale = 1;
@@ -140,6 +148,15 @@ public class InterfaceController : MonoBehaviour
                 temp.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
             }
             weapon_list.Add(temp);
+        }
+        item_list = new List<GameObject>();
+        for(int i = 0; i <= GameManager.Instance.possessed_items.Count - 1; i++)
+        {
+            GameObject temp = Instantiate(item_prefab, game_menu.transform);
+            temp.transform.localPosition = new Vector3(242.9f + 62.4f * (i % 5), 137.9f + 62.4f * (i / 5), 0);
+            temp.GetComponent<ItemButton>().item = GameManager.Instance.possessed_items[i];
+            temp.GetComponent<ItemButton>().InitializeItem();
+            item_list.Add(temp);
         }
     }
 
