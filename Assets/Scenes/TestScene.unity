@@ -582,7 +582,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   possessed_items:
   - {fileID: 11400000, guid: e0482215b7786674f93d8c3a4eae65db, type: 2}
-  item_count: 14000000
+  - {fileID: 11400000, guid: 2ca7cb4035681d14a8a1dd69e1e4fdc8, type: 2}
+  item_count: 1400000005000000
 --- !u!1 &123272487
 GameObject:
   m_ObjectHideFlags: 0
