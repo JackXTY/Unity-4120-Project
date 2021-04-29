@@ -5575,7 +5575,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8252765768303908276}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 35.1, y: 0.1, z: -37.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5585,7 +5585,7 @@ Transform:
   - {fileID: 8252765767768165096}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
 --- !u!95 &8252765768313432020
 Animator:
   serializedVersion: 3
@@ -5649,10 +5649,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animSpeed: 1.2
   lookSmoother: 3
-  forwardSpeed: 1.2
-  backwardSpeed: 0.5
-  rotateSpeed: 0.25
-  jumpPower: 3
+  forwardSpeed: 3
+  backwardSpeed: 1.5
+  rotateSpeed: 1
+  jumpPower: 3.5
   stairLayer:
     serializedVersion: 2
     m_Bits: 512

@@ -24,7 +24,7 @@ namespace UnityChan
 		public float forwardSpeed = 1.2f;
 		public float backwardSpeed = 0.5f;
 		public float rotateSpeed = 0.3f;
-		public float jumpPower = 3.0f; 
+		public float jumpPower = 4.0f; 
         public LayerMask stairLayer;
 		private CapsuleCollider col;
 		private Rigidbody rb;
@@ -35,8 +35,6 @@ namespace UnityChan
 		private AnimatorStateInfo currentBaseState;
 		// private GameObject cameraObject;
 
-		static int idleState = Animator.StringToHash("Base Layer.Idle");
-		static int locoState = Animator.StringToHash("Base Layer.Locomotion");
 		static int jumpState = Animator.StringToHash("Base Layer.Jump");
 		// static int restState = Animator.StringToHash ("Base Layer.Rest");
 
@@ -51,7 +49,7 @@ namespace UnityChan
 		}
 	
 	
-		void Update ()
+		void FixedUpdate ()
 		{
 			float h = Input.GetAxis("Horizontal");
 			float v = Input.GetAxis("Vertical");
@@ -70,37 +68,26 @@ namespace UnityChan
 				velocity *= backwardSpeed;
 			}
 		
-			if (Input.GetButtonDown("Jump")) {
+			if (Input.GetKeyDown("k")) {
                 // Debug.Log("Button pressed");
-				if (currentBaseState.nameHash != jumpState) {
-					// Debug.Log("able to jump");
-                    if (!anim.IsInTransition(0)) {
-						rb.AddForce (Vector3.up * jumpPower, ForceMode.VelocityChange);
-						anim.SetBool ("Jump", true);
-					}
-				}
+				Debug.Log("want to jump");
+				rb.AddForce (Vector3.up * jumpPower, ForceMode.VelocityChange);
+				anim.SetTrigger("Jump");
 			}
 		
-
 			transform.localPosition += velocity * Time.fixedDeltaTime;
-			transform.Rotate (0, h * rotateSpeed, 0);	
-
-		    if (currentBaseState.nameHash == jumpState) {
-				if (!anim.IsInTransition(0)) {		
-					anim.SetBool("Jump", false);
-				}
-			}
-
+			transform.Rotate (0, h * rotateSpeed, 0);
             
-            if(v > 1e-5f){
+            if(currentBaseState.nameHash != jumpState){
                 Vector3 RayOrigin = new Vector3 (this.transform.position.x, this.transform.position.y , this.transform.position.z )
-                    + this.transform.up + this.transform.forward * forwardSpeed;
+                    + this.transform.up * 2.0f + this.transform.forward;
                 Ray ray = new Ray();
                 ray.origin = RayOrigin;
                 ray.direction = new Vector3 (0, -1, 0);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 100.0f, stairLayer)){
 					// Debug.Log(-this.transform.position.y + hit.point.y);
+					Debug.Log("going up stair");
                 	this.transform.Translate(0, -this.transform.position.y + hit.point.y, Time.deltaTime * forwardSpeed);
 				}
             }
