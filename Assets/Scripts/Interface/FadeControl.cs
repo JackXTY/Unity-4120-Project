@@ -79,6 +79,15 @@ public class FadeControl : MonoBehaviour
                 //gameObject.GetComponent<Image>().color = tmp;
 
             }
+
+            for (int i = 0; i <= texts.Length - 1; i++)
+            {
+                Color tmp = colors3[i];
+                tmp.a = 0;
+                texts[i].GetComponent<Text>().color = tmp;
+                //gameObject.GetComponent<Image>().color = tmp;
+
+            }
         }
 
     }
