@@ -8,7 +8,7 @@ public class FloorButtonPuzzle : MonoBehaviour
     public Material red;
     private string[] materialStates = new string[25];
     private Renderer[] renderers = new Renderer[25];
-    private bool win = false;
+    public bool win = false;
 
     void Start()
     {
@@ -65,6 +65,6 @@ public class FloorButtonPuzzle : MonoBehaviour
         }
         win = true;
         Debug.Log("win the puzzle!!!");
-        return true;
+        return win;
     }
 }

@@ -19,8 +19,6 @@ public class doorControl : MonoBehaviour
         Vector3 heading;
         player = GameObject.FindGameObjectWithTag("Player");
         heading = player.transform.position - transform.position;
-        //Debug.Log(heading.sqrMagnitude);
-        //Debug.Log(player);
         if (heading.sqrMagnitude < scanRange * scanRange)
         {
         	Debug.Log("Near");
