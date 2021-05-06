@@ -6,7 +6,7 @@ public class Cannon : MonoBehaviour
 {
     public float rotationDamping = 6.0f;
     public float shootForce = 30f;
-    public float range = 100f;
+    public float range = 20f;
     public float shootInterval = 1.5f;
     public GameObject prefabBullet;
     private GameObject player;

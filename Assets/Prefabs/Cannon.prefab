@@ -145,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationDamping: 6
   shootForce: 30
-  range: 100
-  shootInterval: 1
+  range: 20
+  shootInterval: 1.5
   prefabBullet: {fileID: 3622937132871475172, guid: 9f394a857e64c3d458909daa190a638d,
     type: 3}
