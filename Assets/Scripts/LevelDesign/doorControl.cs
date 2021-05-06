@@ -5,7 +5,7 @@ using UnityEngine;
 public class doorControl : MonoBehaviour
 {
 	private Animator thisAnim;
-	public float scanRange = 5.0f;
+	public float scanRange = 4.0f;
     // Start is called before the first frame update
     void Start()
     {
