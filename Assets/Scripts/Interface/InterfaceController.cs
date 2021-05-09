@@ -115,6 +115,7 @@ public class InterfaceController : MonoBehaviour
                 Destroy(item, 0.5f);
             }
             weapon_list.Clear();
+            item_list.Clear();
         }
         Time.timeScale = 1;
     }
@@ -158,6 +159,24 @@ public class InterfaceController : MonoBehaviour
             temp.GetComponent<ItemButton>().InitializeItem();
             item_list.Add(temp);
         }
+    }
+
+    public void RefreshItemArea()
+    {
+        foreach (GameObject item in item_list)
+        {           
+            Destroy(item);
+        }
+        item_list.Clear();
+        for (int i = 0; i <= GameManager.Instance.possessed_items.Count - 1; i++)
+        {
+            GameObject temp = Instantiate(item_prefab, game_menu.transform);
+            temp.transform.localPosition = new Vector3(242.9f + 62.4f * (i % 5), 137.9f + 62.4f * (i / 5), 0);
+            temp.GetComponent<ItemButton>().item = GameManager.Instance.possessed_items[i];
+            temp.GetComponent<ItemButton>().InitializeItem();
+            item_list.Add(temp);
+        }
+
     }
 
     public void WeaponListToLeft()

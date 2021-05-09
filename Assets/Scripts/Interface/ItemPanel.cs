@@ -55,6 +55,7 @@ public class ItemPanel : MonoBehaviour
         else
         {
             CloseWindow();
+            InterfaceController.Instance.RefreshItemArea();
         }
         
         
