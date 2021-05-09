@@ -15,7 +15,7 @@ public class MovingPlatform : MonoBehaviour
     public bool moveAlong = false;
     private int state; // -1 => backward, -2 => backward to forward, 1 => forward, 2 => forward to backward
     private float counter;
-    private bool hasPlayer = false;
+    private bool begin = false;
     private Vector3 initialPosition;
     private Vector3 playerMovement;
     private GameObject player;
@@ -32,7 +32,7 @@ public class MovingPlatform : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(moveAlong && !hasPlayer){
+        if(moveAlong && !begin){
             return;
         }
         float movement = Time.deltaTime * speed;
@@ -75,7 +75,7 @@ public class MovingPlatform : MonoBehaviour
 
         if(translation != 0f){
             transform.Translate(direction * translation);
-            if(moveAlong && hasPlayer){
+            if(moveAlong && player!=null){
                 player.transform.Translate(direction * translation, Space.World);
                 Debug.Log(direction);
                 Debug.Log(translation);
@@ -86,17 +86,17 @@ public class MovingPlatform : MonoBehaviour
     void OnTriggerEnter(Collider col){
         if(col.gameObject.tag == "Player"){
             player = col.gameObject;
-            hasPlayer = true;
-            player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePosition;
+            begin = true;
+            //player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePosition;
             Debug.Log("Enter Player Collision");
         }
     }
 
     void OnTriggerExit(Collider col){
         if(col.gameObject.tag == "Player"){
-            hasPlayer = false;
+            // hasPlayer = false;
             // playerTransform.position = initialPosition;
-            player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            // player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             player = null;
             Debug.Log("Exit Player Collision");
         }
