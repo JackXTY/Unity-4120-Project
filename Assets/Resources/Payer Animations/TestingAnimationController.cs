@@ -6,7 +6,12 @@ using UnityEngine;
 
 public class    TestingAnimationController : MonoBehaviour
 {
-    public bool addForce = false;
+
+    //vatiables related to camera and character y rotation
+    private Vector2 turn;
+
+    //variables related to animator controller
+    private bool addForce = false;
     private float preY=1;
     public float acc;
     public float angularAcc;
@@ -29,56 +34,73 @@ public class    TestingAnimationController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         thisAnim = GetComponent<Animator>();
         //need to handle the collider to handle crouching animation
         capsule = GetComponent<CapsuleCollider>();
         capsuleHeight = capsule.height;
         capsuleCenter = capsule.center;
+        print("capsule.height is "+capsule.height);
+        print("capsule.center is "+capsule.center.y);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        handlePlayerRotation();
         handleInput();
         detectGround();
-        handleCapsuleCollider();
+        handleCrouchCapsuleCollider();
         updateAnimator();
-        print("the gound situation is curenlty " + grounded);
+        //print("the gound situation is curenlty " + grounded);
     }
 
 
+    void handlePlayerRotation(){
+        turn.x += Input.GetAxis("Mouse X");
+        turn.y += Input.GetAxis("Mouse Y");
+        transform.rotation = Quaternion.Euler(0f,turn.x,0);
+    }
     void detectGround(){
-        if(Physics.Raycast(transform.position+(Vector3.up*0.1f),Vector3.down,groundDistance,whatIsGround)){
+        if(Physics.Raycast(capsule.transform.TransformPoint(capsule.center),Vector3.down,capsule.height/2 + groundDistance,whatIsGround)){
+            if(!pGround){
+                print("landing");
+            }
             pGround = grounded = true;
-            print("grounded");
+            //print("normal grounded");
             thisAnim.applyRootMotion = true;
+            preY = 1.0f;
         }else if(Mathf.Abs(GetComponent<Rigidbody>().velocity.y)<=0.01){
             if(Mathf.Abs(GetComponent<Rigidbody>().velocity.y-preY)<=0.01){
+                print((GetComponent<Rigidbody>().velocity.y));
+                print(preY);
                 pGround = grounded = true;
                 thisAnim.applyRootMotion = true;
                 preY = 1.0f;
+                print("stuck grounded" + grounded);
+                
             }else{
                 preY = GetComponent<Rigidbody>().velocity.y;
             } 
         }
         else{
-            print("ungrounded");
+            //print("ungrounded");
             grounded = false;
             thisAnim.applyRootMotion = false;
-           // thisAnim.SetBool("Grounded",false);
+            //thisAnim.SetBool("Grounded",false);
         }
     }
 
 
     void handleInput(){
         //inputs for jump function are not yet implemented
-        /*
+        
         if(Input.GetButtonDown("Jump")){
             jump = true;
-            print("pressed jump");
+            //print("pressed jump");
          //   rigidbody.AddForce(Vector3.up*JumpForce);
          //   thisAnim.SetTrigger("Jump");
-        }*/
+        }
 
         //handle crouch/uncrouch
         if(Input.GetKeyDown("c")){
@@ -101,15 +123,15 @@ public class    TestingAnimationController : MonoBehaviour
            if(!Input.GetKey(KeyCode.S)){
             v +=  Time.deltaTime * acc;
             if(v<0){
-               v += 0.5f * Time.deltaTime * acc; 
+               v += 0.7f * Time.deltaTime * acc; 
             }}
         }else if(Input.GetKey(KeyCode.S)){
             v -= Time.deltaTime * acc;
             if(v>0){
-               h -= 0.5f*Time.deltaTime * acc; 
+               h -= 0.7f*Time.deltaTime * acc; 
             }
         }else if( Mathf.Abs(v)>=0.05){
-            v += 1.5f * Time.deltaTime * acc * (v<0?1:(-1));
+            v += 1.7f * Time.deltaTime * acc * (v<0?1:(-1));
         }else{
             v = 0;
         }
@@ -118,15 +140,15 @@ public class    TestingAnimationController : MonoBehaviour
             if(!Input.GetKey(KeyCode.D)){
             h -= Time.deltaTime * angularAcc;
             if(h>0){
-               h -= 0.5f*Time.deltaTime * angularAcc; 
+               h -= 0.7f*Time.deltaTime * angularAcc; 
             }}
         }else if(Input.GetKey(KeyCode.D)){
             h += Time.deltaTime * angularAcc;
             if(h<0){
-               h += 0.5f*Time.deltaTime * angularAcc; 
+               h += 0.7f*Time.deltaTime * angularAcc; 
             }
         }else if( Mathf.Abs(h) >= 0.03){
-            h += 1.5f * Time.deltaTime * angularAcc * (h<0?1:(-1));
+            h += 1.7f * Time.deltaTime * angularAcc * (h<0?1:(-1));
         }else{
             h = 0;
         }
@@ -152,21 +174,26 @@ public class    TestingAnimationController : MonoBehaviour
 
     }
 
-// update Capsule Collider for Crouch animation, not yet implemented
-    void handleCapsuleCollider(){
+// update Capsule Collider for Crouch animation
+    void handleCrouchCapsuleCollider(){
         if(crouch && grounded){
             if(isCrouching) return;
             isCrouching = true;
             capsule.height = capsule.height / 1.4f;
             capsule.center = capsule.center / 1.55f;
            // print("adjusted collider");
-        }else{
+        }else if(grounded){
             capsule.height = capsuleHeight;
             capsule.center = capsuleCenter;
             isCrouching = false;
             crouch = false;
         }
     } 
+
+    void handleInAirCapsuleCollider(){
+        capsule.height = capsule.height / 1.3f;
+        capsule.center = capsule.center / 0.6f;
+    }
     void updateAnimator(){
         thisAnim.SetFloat("zSpeed", v);
         thisAnim.SetFloat("xSpeed", h);
@@ -175,28 +202,29 @@ public class    TestingAnimationController : MonoBehaviour
         
 
         //functions related to jumping are not yet implemented
-        /*
+        
         thisAnim.SetBool("Grounded",grounded);
         
 
         if(grounded && jump){
             print("jump");
             thisAnim.SetTrigger("Jump");
+            handleInAirCapsuleCollider();
             GetComponent<Rigidbody>().AddForce(Vector3.up*JumpForce);
-            jump = false;
- 
-            pGround = false;
             grounded = false;
-            thisAnim.SetBool("Grounded",grounded);
+            jump = false;
+            pGround = false;
+            print("addforce");
         }
         else if(!grounded && pGround){
             print("fall off");
-            thisAnim.SetTrigger("Jump");
+            thisAnim.SetTrigger("Fall");
+            handleInAirCapsuleCollider();
             pGround = false;
-        }*/
+        }
 
     }
-    public void OnAnimatorMove()
+/*    public void OnAnimatorMove()
 		{
 			// we implement this function to override the default root motion.
 			// this allows us to modify the positional speed before it's applied.
@@ -209,6 +237,6 @@ public class    TestingAnimationController : MonoBehaviour
 				GetComponent<Rigidbody>().velocity = v;
                 transform.rotation = r;
 		}
-        }
+        }*/
 
 }
