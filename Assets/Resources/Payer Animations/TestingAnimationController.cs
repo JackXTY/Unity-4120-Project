@@ -191,7 +191,7 @@ public class    TestingAnimationController : MonoBehaviour
     } 
 
     void handleInAirCapsuleCollider(){
-        capsule.height = capsule.height / 1.3f;
+        capsule.height = capsule.height / 1.1f;
         capsule.center = capsule.center / 0.6f;
     }
     void updateAnimator(){
@@ -209,17 +209,18 @@ public class    TestingAnimationController : MonoBehaviour
         if(grounded && jump){
             print("jump");
             thisAnim.SetTrigger("Jump");
-            handleInAirCapsuleCollider();
+            //handleInAirCapsuleCollider();
             GetComponent<Rigidbody>().AddForce(Vector3.up*JumpForce);
             grounded = false;
             jump = false;
             pGround = false;
             print("addforce");
         }
+        //not working properly due to collider issues
         else if(!grounded && pGround){
             print("fall off");
-            thisAnim.SetTrigger("Fall");
-            handleInAirCapsuleCollider();
+            //thisAnim.SetTrigger("Fall");
+            //handleInAirCapsuleCollider();
             pGround = false;
         }
 
