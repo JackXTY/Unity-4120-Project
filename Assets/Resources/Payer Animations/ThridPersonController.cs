@@ -27,11 +27,15 @@ public class ThridPersonController : MonoBehaviour
     private Vector3 velocity;
     [SerializeField] public float jumpVelocity;
 
-    private bool isGrounded;
+    [SerializeField] private bool isGrounded;
+    private int fall = 0;
+    [SerializeField] private bool previouslyGrounded = true;
+    private float previousY = 0.0f;
     private bool crouch = false;
     private bool run = false;
     private bool sprint = false;
     private bool jump = false;
+    private bool ascending = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,13 +59,43 @@ public class ThridPersonController : MonoBehaviour
     void Move(){
         handlePlayerRotation();
 
-        isGrounded = Physics.CheckSphere(transform.position + controller.center, controller.height / 2 + groundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(transform.position + controller.center - new Vector3(0,controller.height / 2 - groundOffset,0) ,  groundDistance, groundMask);
 
-        print("ground situation" + isGrounded);
 
         if(isGrounded && velocity.y < 0){
+            //print("reverting y velocity");
+            velocity.y = -0.01f;
+        }else if(!isGrounded && controller.velocity.y == previousY && ascending == true){
+            print("head bonked");
             velocity.y = -0.1f;
+            ascending = false;
+        }else if(!isGrounded && controller.velocity.y<0){
+            velocity.y = controller.velocity.y;
+            ascending = false;
+            print("before move velocity y is:" + velocity.y);
+        }else if(!isGrounded && controller.velocity.y >0){
+            ascending = true;
         }
+
+        
+
+        if(fall == 0 && !isGrounded){
+            print("start falling check");
+            fall = 1;
+        }
+        
+        if(!isGrounded && fall>=1 && controller.velocity.y - previousY <= gravity * Time.deltaTime * 0.95f && controller.velocity.y - previousY >= gravity * Time.deltaTime * 1.05f){
+            fall += 1;
+        }else{
+            fall = -1;
+        }
+
+        if(previouslyGrounded != isGrounded && previouslyGrounded == true){
+            fall = 0;
+        }
+        
+        previouslyGrounded = isGrounded;
+        previousY = controller.velocity.y;
 
         if(isGrounded){
             if(Input.GetButtonDown("Jump")){
@@ -75,7 +109,7 @@ public class ThridPersonController : MonoBehaviour
         
 
         if(isGrounded){
-            print("on ground");
+            //print("on ground");
             if(Input.GetKey(KeyCode.LeftShift)){
                 run = true;
                 crouch = false;
@@ -144,12 +178,12 @@ public class ThridPersonController : MonoBehaviour
             moveDirection = transform.TransformDirection(moveDirection);
         }
         
-        
-        controller.Move(moveDirection*Time.deltaTime*moveSpeed);
-
         velocity.y += gravity * Time.deltaTime;
 
-        controller.Move(velocity* Time.deltaTime);
+        print("after move velocity y is " + velocity.y);
+
+        controller.Move(moveDirection*Time.deltaTime*moveSpeed + velocity*Time.deltaTime);
+
 
         updateAnimator();
     }
@@ -161,9 +195,16 @@ public class ThridPersonController : MonoBehaviour
     }
 
     void updateAnimator(){
+        if(fall > 20){
+            print("falling");
+            animator.SetTrigger("Fall");
+            fall = -1;
+            jump = false;
+        }
         if(jump){
             animator.SetTrigger("Jump");
             jump = false;
+            previouslyGrounded = false;
         }
         
         animator.SetFloat("zSpeed", zSpeed / (speedLimit*speedMultiplyer));
