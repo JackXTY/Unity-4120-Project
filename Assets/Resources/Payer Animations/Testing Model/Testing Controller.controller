@@ -607,7 +607,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 845491245707093311}
-    m_Position: {x: 290, y: 280, z: 0}
+    m_Position: {x: 280, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6244002835335133710}
     m_Position: {x: 210, y: 620, z: 0}
@@ -661,7 +661,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: Sprint
     m_Type: 4
@@ -932,7 +932,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -1340,7 +1340,7 @@ AnimatorStateMachine:
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -113890518044202290}
-    m_Position: {x: 380, y: 160, z: 0}
+    m_Position: {x: 380, y: 110, z: 0}
   m_AnyStateTransitions:
   - {fileID: 4837223717771382901}
   - {fileID: 7751589673874447213}

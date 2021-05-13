@@ -70,8 +70,8 @@ public class    TestingAnimationController : MonoBehaviour
             //print("normal grounded");
             thisAnim.applyRootMotion = true;
             preY = 1.0f;
-        }else if(Mathf.Abs(GetComponent<Rigidbody>().velocity.y)<=0.01){
-            if(Mathf.Abs(GetComponent<Rigidbody>().velocity.y-preY)<=0.01){
+        }else if(Mathf.Abs(GetComponent<Rigidbody>().velocity.y)<=0.05){
+            if(Mathf.Abs(GetComponent<Rigidbody>().velocity.y-preY)<=0.05){
                 print((GetComponent<Rigidbody>().velocity.y));
                 print(preY);
                 pGround = grounded = true;
