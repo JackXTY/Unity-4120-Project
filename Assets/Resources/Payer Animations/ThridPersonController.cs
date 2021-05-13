@@ -35,7 +35,12 @@ public class ThridPersonController : MonoBehaviour
     private bool run = false;
     private bool sprint = false;
     private bool jump = false;
+
     private bool ascending = false;
+
+    private bool attack1 = false;
+    private bool attack2 = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -176,6 +181,15 @@ public class ThridPersonController : MonoBehaviour
 
             moveDirection = new Vector3(xSpeed,0,zSpeed);
             moveDirection = transform.TransformDirection(moveDirection);
+
+            if(Input.GetKeyDown(KeyCode.J)){
+                attack1 = true;
+                Debug.Log("Attack 1!!");
+            }
+            else if(Input.GetKeyDown(KeyCode.K)){
+                attack2 = true;
+                Debug.Log("Attack 2!!");
+            }
         }
         
         velocity.y += gravity * Time.deltaTime;
@@ -212,5 +226,13 @@ public class ThridPersonController : MonoBehaviour
         animator.SetBool("Crouch",crouch);
         animator.SetBool("Sprint",run);
         animator.SetBool("Grounded",isGrounded);
+        if(attack1){
+            animator.SetTrigger("Attack1");
+            attack1 = false;
+        }
+        if(attack2){
+            animator.SetTrigger("Attack2");
+            attack2 = false;
+        }
     }
 }
