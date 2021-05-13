@@ -55,7 +55,7 @@ public class ThridPersonController : MonoBehaviour
     void Move(){
         handlePlayerRotation();
 
-        isGrounded = Physics.CheckSphere(transform.position + new Vector3 (0,groundOffset,0), groundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(transform.position + controller.center, controller.height / 2 + groundDistance, groundMask);
 
         print("ground situation" + isGrounded);
 
@@ -75,6 +75,7 @@ public class ThridPersonController : MonoBehaviour
         
 
         if(isGrounded){
+            print("on ground");
             if(Input.GetKey(KeyCode.LeftShift)){
                 run = true;
                 crouch = false;
@@ -87,15 +88,7 @@ public class ThridPersonController : MonoBehaviour
             }else {
                 run = false;
                 speedMultiplyer = WALK_SPEED;
-            }    
-
-        //handle crouch/uncrouch
-            if(Input.GetKeyDown("c")){
-                //print("into crouch");
-                //print("pressed crouch");
-                //crouch = !crouch;
-            // thisAnim.SetBool("Crouch",crouch);
-            }
+            }  
 
             //handle  WASD inputs for SMOOTH 8way movement
             if(Input.GetKey(KeyCode.W)){
