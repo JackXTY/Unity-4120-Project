@@ -41,8 +41,8 @@ ModelImporter:
       name: Standing Land To Standing Idle 1
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 1.6
-      lastFrame: 6.3
+      firstFrame: 2.8
+      lastFrame: 4.3
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
