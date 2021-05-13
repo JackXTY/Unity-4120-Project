@@ -215,7 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acc: 3
   angularAcc: 3
-  JumpForce: 500
+  JumpForce: 400
   groundDistance: 0.01
   whatIsGround:
     serializedVersion: 2
