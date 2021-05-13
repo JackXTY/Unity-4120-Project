@@ -208,8 +208,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acc: 3
   angularAcc: 3
-  JumpForce: 500
-  groundDistance: 0.001
+  JumpForce: 400
+  groundDistance: 0.01
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256

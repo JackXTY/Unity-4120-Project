@@ -31,6 +31,8 @@ public class    TestingAnimationController : MonoBehaviour
     private Vector3 capsuleCenter;
     private bool pGround = true;
     private bool sprint = false;
+    private bool attack1 = false;
+    private bool attack2 = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -168,6 +170,18 @@ public class    TestingAnimationController : MonoBehaviour
             h=-speedLimit;
         }
 
+        //if(thisAnim.GetCurrentAnimatorStateInfo(1).IsName("Idle"))
+        if(Input.GetKeyDown(KeyCode.J)){
+            attack1 = true;
+            Debug.Log("Attack 1!!");
+        }
+        else if(Input.GetKeyDown(KeyCode.K)){
+            attack2 = true;
+            Debug.Log("Attack 2!!");
+        }
+        
+        
+
         
         //thisAnim.SetFloat("Speed", v);
         //thisAnim.SetFloat("Turning Speed", h);
@@ -223,6 +237,24 @@ public class    TestingAnimationController : MonoBehaviour
             //handleInAirCapsuleCollider();
             pGround = false;
         }
+
+        
+        if(attack1){
+            thisAnim.SetTrigger("Attack1");
+            attack1 = false;
+        }
+        if(attack2){
+            thisAnim.SetTrigger("Attack2");
+            attack2 = false;
+        }
+
+        
+        // if(thisAnim.GetCurrentAnimatorStateInfo(1).IsName("null")){
+        //     Debug.Log("null state");
+        // }else{
+        //     Debug.Log("attack state");
+        // }
+
 
     }
 /*    public void OnAnimatorMove()
