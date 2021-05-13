@@ -38,8 +38,8 @@ ModelImporter:
       name: Standing Jump Alt
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 45
-      lastFrame: 53
+      firstFrame: 42
+      lastFrame: 52
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

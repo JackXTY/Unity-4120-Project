@@ -142,13 +142,13 @@ CharacterController:
   m_GameObject: {fileID: 635924704}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Height: 1.7
   m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.05
+  m_SkinWidth: 0.01
   m_MinMoveDistance: 0.01
   m_Center: {x: 0, y: 0.87, z: 0}
 --- !u!114 &635924706
@@ -158,19 +158,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635924704}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22d224f0029ad42438de1e3f9c74816d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WALK_SPEED: 0.5
-  RUN_SPEED: 1
+  WALK_SPEED: 0.7
+  CROUCH_SPEED: 0.4
+  RUN_SPEED: 1.1
   X_ACC: 3
   Z_ACC: 3
   moveSpeed: 3
-  speedLimit: 0.5
+  speedLimit: 1
+  speedMultiplyer: 0
   zSpeed: 0
   xSpeed: 0
+  gravity: -9.8
+  groundDistance: 0.15
+  groundOffset: 0.1
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  jumpVelocity: 11
 --- !u!136 &635924707
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -180,27 +189,11 @@ CapsuleCollider:
   m_GameObject: {fileID: 635924704}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.4078168
   m_Height: 1.7038577
   m_Direction: 1
   m_Center: {x: 0, y: 0.8613237, z: 0.006700307}
---- !u!54 &635924709
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 635924704}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!114 &635924710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +201,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635924704}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc85e85bd6734ea449312d49385b4a74, type: 3}
   m_Name: 
@@ -216,7 +209,7 @@ MonoBehaviour:
   acc: 3
   angularAcc: 3
   JumpForce: 500
-  groundDistance: 0.01
+  groundDistance: 0.001
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
