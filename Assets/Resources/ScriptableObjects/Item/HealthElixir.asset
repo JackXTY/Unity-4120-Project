@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 25714575919776087, guid: c587b37f802b17a4a80222a9a08709e2, type: 3}
   item_name: Health Elixir
-  description: Drinking this will magically recover all of your wounds.
+  description: Drinking this will magically recover most of your wounds.
   usage: heal
   usage_value: 50
