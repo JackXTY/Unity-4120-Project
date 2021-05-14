@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Stair
   - projector
+  - Monster
+  - Weapon
   layers:
   - Default
   - TransparentFX
