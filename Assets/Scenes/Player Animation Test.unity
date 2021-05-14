@@ -148,8 +148,8 @@ CharacterController:
   m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.0001
-  m_MinMoveDistance: 0.01
+  m_SkinWidth: 0.05
+  m_MinMoveDistance: 0.04
   m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &635924706
 MonoBehaviour:
@@ -175,7 +175,7 @@ MonoBehaviour:
   xSpeed: 0
   gravity: -12
   groundDistance: 0.25
-  groundOffset: 0.2
+  groundOffset: 0.15
   groundMask:
     serializedVersion: 2
     m_Bits: 256

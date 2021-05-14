@@ -67,18 +67,16 @@ public class ThridPersonController : MonoBehaviour
         isGrounded = Physics.CheckSphere(transform.position + controller.center - new Vector3(0,controller.height / 2 - groundOffset,0) ,  groundDistance, groundMask);
 
 
-        if(isGrounded && velocity.y < 0){
-            //print("reverting y velocity");
+        if(isGrounded && velocity.y < 0 ){
+            //print("Grounded?");
             velocity.y = -0.01f;
-        }else if(!isGrounded && controller.velocity.y == previousY && ascending == true){
-            print("head bonked");
+        }else if(controller.collisionFlags == CollisionFlags.Above && ascending){
+            print("head bonked?");
             velocity.y = -0.1f;
             ascending = false;
         }else if(!isGrounded && controller.velocity.y<0){
-            velocity.y = controller.velocity.y;
             ascending = false;
-            print("before move velocity y is:" + velocity.y);
-        }else if(!isGrounded && controller.velocity.y >0){
+        }else if(!isGrounded && controller.velocity.y>0){
             ascending = true;
         }
 
@@ -194,7 +192,7 @@ public class ThridPersonController : MonoBehaviour
         
         velocity.y += gravity * Time.deltaTime;
 
-        print("after move velocity y is " + velocity.y);
+        //print("after move velocity y is " + velocity.y);
 
         controller.Move(moveDirection*Time.deltaTime*moveSpeed + velocity*Time.deltaTime);
 
