@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -203,7 +203,9 @@ public class ThridPersonController : MonoBehaviour
 
         //print("after move velocity y is " + velocity.y);
 
-        controller.Move(moveDirection*Time.deltaTime*moveSpeed + velocity*Time.deltaTime);
+        controller.Move(moveDirection*Time.deltaTime*moveSpeed);
+
+        
 
 
         updateAnimator();
