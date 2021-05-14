@@ -41,6 +41,9 @@ public class ThridPersonController : MonoBehaviour
     private bool attack1 = false;
     private bool attack2 = false;
 
+
+    public Weapon weapon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -182,12 +185,18 @@ public class ThridPersonController : MonoBehaviour
 
             if(Input.GetKeyDown(KeyCode.J)){
                 attack1 = true;
+                weapon.changeAttack(1);
                 Debug.Log("Attack 1!!");
             }
             else if(Input.GetKeyDown(KeyCode.K)){
                 attack2 = true;
+                weapon.changeAttack(2);
                 Debug.Log("Attack 2!!");
             }
+            //else if(!(animator.GetCurrentAnimatorStateInfo(0).IsName("attack1")||
+            //     animator.GetCurrentAnimatorStateInfo(0).IsName("attack2"))){
+            //     weapon.changeAttack(0);
+            // }
         }
         
         velocity.y += gravity * Time.deltaTime;

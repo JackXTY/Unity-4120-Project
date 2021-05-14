@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db6412604cd1104bae04ef19b46c35b, type: 3}
+  m_Name: MagicalHealthPotion
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 8130433411652346424, guid: c587b37f802b17a4a80222a9a08709e2, type: 3}
+  item_name: Miracle Health Potion
+  description: This miracle potion can get rid of all wounds instantly.
+  usage: full_heal
+  usage_value: 0
