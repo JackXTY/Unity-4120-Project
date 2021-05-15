@@ -90,8 +90,9 @@ public class ThridPersonController : MonoBehaviour
             fall = 1;
         }
         
-        if(!isGrounded && fall>=1 && controller.velocity.y - previousY <= gravity * Time.deltaTime * 0.95f && controller.velocity.y - previousY >= gravity * Time.deltaTime * 1.05f){
+        if(!isGrounded && fall>=1 && velocity.y - previousY <= gravity * Time.deltaTime * 0.95f && velocity.y - previousY >= gravity * Time.deltaTime * 1.1f){
             fall += 1;
+            print("fall frame count: " + fall);
         }else{
             fall = -1;
         }
@@ -101,7 +102,7 @@ public class ThridPersonController : MonoBehaviour
         }
         
         previouslyGrounded = isGrounded;
-        previousY = controller.velocity.y;
+        previousY = velocity.y;
 
         if(isGrounded){
             if(Input.GetButtonDown("Jump")){
@@ -205,7 +206,8 @@ public class ThridPersonController : MonoBehaviour
 
         controller.Move(moveDirection*Time.deltaTime*moveSpeed);
 
-        
+        controller.Move( velocity * Time.deltaTime);
+
 
 
         updateAnimator();
@@ -218,7 +220,7 @@ public class ThridPersonController : MonoBehaviour
     }
 
     void updateAnimator(){
-        if(fall > 20){
+        if(fall > 15){
             print("falling");
             animator.SetTrigger("Fall");
             fall = -1;
