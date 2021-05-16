@@ -27,6 +27,14 @@ public class gameEnd : MonoBehaviour
     }
 
     void Update () {
+        GameObject player;
+        Vector3 heading;
+        player = GameObject.FindGameObjectWithTag("Player");
+        heading = player.transform.position - transform.position;
+        if (heading.sqrMagnitude < 0.4)
+        {
+            end = true;
+        }
     	if (end == true)
     	{
     		if (!myText.enabled)
@@ -40,9 +48,4 @@ public class gameEnd : MonoBehaviour
     	}
     }
 
-    void OnCollisionEnter(Collision other){
-        if (other.gameObject.tag == "Player"){
-            end = true;
-        }
-    }
 }

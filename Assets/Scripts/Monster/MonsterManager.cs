@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MonsterManager : MonoBehaviour
 {
@@ -73,7 +74,12 @@ public class MonsterManager : MonoBehaviour
                         GetComponent<Animator>().SetFloat("Turn", 0);
                         GetComponent<Animator>().SetFloat("Forward", 0);
                         GetComponent<Animator>().SetTrigger("CloseAttack");
-                        InterfaceController.Instance.Damage(10);
+                        try{
+                            InterfaceController.Instance.Damage(10);
+                        }
+                        catch (NullReferenceException ex) {
+                            Debug.Log("Something is missing");
+                        }
                         inner_clock++;
                     }
                     else
@@ -98,13 +104,11 @@ public class MonsterManager : MonoBehaviour
                 {
                     chasing = true;
                     patrol = false;
-
                     //BulletAttack();
                     //GetComponent<Animator>().SetTrigger("BulletAttack");
 
                 }
             }
-
             if (patrol)
             {
                 Vector3 heading = ForceSameLevel(current_target_waypoint.transform.position) - transform.position;
@@ -170,7 +174,7 @@ public class MonsterManager : MonoBehaviour
     public void BulletAttack()
     {
         int number = bullet_count;
-        float offset = Random.Range(0.0f, 360.0f);
+        float offset = UnityEngine.Random.Range(0.0f, 360.0f);
         for (int i = 0; i <= number - 1; i++)
         {
             GameObject bullet_obj = Instantiate(bullet, gameObject.transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f));
