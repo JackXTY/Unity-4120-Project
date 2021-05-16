@@ -1,23 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class gameEnd : MonoBehaviour
 {
 	private Rigidbody rigid;
-    private BoxCollider collider;
 	public bool end = false;
+	public Text myText;
+	private float timeToAppear = 4f;
+	private float timeWhenDisappear;
+
+
+	public void EnableText()
+	{
+    	myText.enabled = true;
+    	timeWhenDisappear = Time.time + timeToAppear;
+	}
+
 
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
-        collider = GetComponent<BoxCollider>();
+        myText.enabled = false;
     }
 
     void Update () {
     	if (end == true)
-        	Application.Quit();
+    	{
+    		if (!myText.enabled)
+    			EnableText();
+    		if (myText.enabled && (Time.time > timeWhenDisappear))
+		    {
+		        myText.enabled = false;
+		        Application.Quit();
+		        Debug.Log("quit game");
+		    }
+    	}
     }
 
     void OnCollisionEnter(Collision other){
