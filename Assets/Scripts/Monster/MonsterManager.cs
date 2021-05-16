@@ -26,6 +26,10 @@ public class MonsterManager : MonoBehaviour
     int inner_clock = 0;
 
     public UnityEngine.AI.NavMeshAgent agent;
+    public int hp = 50;
+
+    public float revover_time = 1.5f;
+    private float remain_recover_time = 0;
 
 
     // Start is called before the first frame update
@@ -128,6 +132,9 @@ public class MonsterManager : MonoBehaviour
                 }
             }
         }
+        if(remain_recover_time>0){
+            remain_recover_time -= Time.deltaTime;
+        }
         
     }
 
@@ -184,5 +191,20 @@ public class MonsterManager : MonoBehaviour
             }
         }
         return waypoints[index];
+    }
+
+    public void hit(int attackValue){
+        if(remain_recover_time > 0){
+            Debug.Log(remain_recover_time);
+            return;
+        }
+        else if(attackValue >= hp){
+            Debug.Log("monster defeated!");
+            Destroy(this.gameObject);
+        }else{
+            Debug.Log("monster get hit " + attackValue);
+            hp -= attackValue;
+            remain_recover_time = revover_time;
+        }
     }
 }
