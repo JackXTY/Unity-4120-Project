@@ -22,7 +22,7 @@ public class FallTrap : MonoBehaviour
         rigid.useGravity = true;
     }
 
-    void OnCollisionEnter(Collision other){
+    void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "Player"){
             player = other.gameObject;
             InterfaceController.Instance.Damage(10, false);
