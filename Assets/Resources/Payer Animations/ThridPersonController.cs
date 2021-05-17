@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ThridPersonController : MonoBehaviour
 {
+    public static ThridPersonController Instance;
     [SerializeField] private Vector3 moveDirection;
     private CharacterController controller;
     private Animator animator;
@@ -45,6 +46,8 @@ public class ThridPersonController : MonoBehaviour
     private bool attack1 = false;
     private bool attack2 = false;
 
+    public bool stop;
+
 
     public Weapon weapon;
 
@@ -54,13 +57,33 @@ public class ThridPersonController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        stop = false;
+        if(Instance == null)
+        {
+            Instance = this;
+        }
     }
 
     // Update is called once per frame
 
     void Update()
     {
-        Move();
+        if (!stop)
+        {
+            Move();
+        }
+    }
+
+    public void ResumeMouseControl()
+    {
+        stop = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void DisableMouseControl()
+    {
+        stop = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
 

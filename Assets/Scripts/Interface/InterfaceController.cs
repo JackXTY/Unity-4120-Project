@@ -69,6 +69,7 @@ public class InterfaceController : MonoBehaviour
     [ContextMenu("OpenInterface")]
     public void OpenInterface()
     {
+        ThridPersonController.Instance.ResumeMouseControl();
         SetInterfaceColor();
         foreach(GameObject obj in general)
         {
@@ -91,6 +92,7 @@ public class InterfaceController : MonoBehaviour
     [ContextMenu("CloseInterface")]
     public void CloseInterface()
     {
+        ThridPersonController.Instance.DisableMouseControl();
         foreach (GameObject obj in general)
         {
             obj.GetComponent<FadeControl>().StartFadeOut();
@@ -154,7 +156,7 @@ public class InterfaceController : MonoBehaviour
         for(int i = 0; i <= GameManager.Instance.possessed_items.Count - 1; i++)
         {
             GameObject temp = Instantiate(item_prefab, game_menu.transform);
-            temp.transform.localPosition = new Vector3(242.9f + 62.4f * (i % 5), 137.9f + 62.4f * (i / 5), 0);
+            temp.transform.localPosition = new Vector3(242.9f + 62.4f * (i % 5), 137.9f - 62.4f * (i / 5), 0);
             temp.GetComponent<ItemButton>().item = GameManager.Instance.possessed_items[i];
             temp.GetComponent<ItemButton>().InitializeItem();
             item_list.Add(temp);
