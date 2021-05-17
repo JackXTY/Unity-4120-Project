@@ -5,6 +5,8 @@ using UnityEngine;
 public class ThridPersonController : MonoBehaviour
 {
     [SerializeField] private Vector3 moveDirection;
+
+    [SerializeField] private Vector3 localDirection;
     private CharacterController controller;
     private Animator animator;
 
@@ -60,7 +62,68 @@ public class ThridPersonController : MonoBehaviour
 
     void Update()
     {
+        handlePlayerRotation();
+        
+        if (isGrounded)
+        {
+            //print("on ground");
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                run = !run;
+                crouch = false;
+                if (run)
+                {
+                    speedMultiplyer = RUN_SPEED;
+                    speedLimit = RUN_SPEED;
+                }
+                else
+                {
+                    speedMultiplyer = WALK_SPEED;
+                    speedLimit = WALK_SPEED;
+                }
+            }
+            else if (Input.GetKeyDown("c"))
+            {
+                crouch = !crouch;
+                run = false;
+                if (crouch)
+                {
+                    speedMultiplyer = CROUCH_SPEED;
+                    speedLimit = CROUCH_SPEED;
+                }
+                else
+                {
+                    speedMultiplyer = WALK_SPEED;
+                    speedLimit = WALK_SPEED;
+                }
+
+            }
+
+
+
+
+
+
+            // attack can only be performed on ground
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                attack1 = true;
+                weapon.changeAttack(1);
+                Debug.Log("Attack 1!!");
+            }
+            else if (Input.GetKeyDown(KeyCode.K))
+            {
+                attack2 = true;
+                weapon.changeAttack(2);
+                Debug.Log("Attack 2!!");
+            }
+            //else if(!(animator.GetCurrentAnimatorStateInfo(0).IsName("attack1")||
+            //     animator.GetCurrentAnimatorStateInfo(0).IsName("attack2"))){
+            //     weapon.changeAttack(0);
+            // }
+        }
         Move();
+        updateAnimator();
     }
 
 
@@ -69,24 +132,34 @@ public class ThridPersonController : MonoBehaviour
     {
 
         //print("right feet: "+ animator.rightFeetBottomHeight + " left feet: " + animator.leftFeetBottomHeight);
+        moveDirection = new Vector3(xSpeed, 0, zSpeed);
+        moveDirection = transform.TransformDirection(moveDirection);
+
+        //print("after move velocity y is " + velocity.y);
+
+        controller.Move(moveDirection * Time.deltaTime * moveSpeed);
+
+        
+
+        controller.Move(velocity * Time.deltaTime);
     }
 
     void Move()
     {
-        handlePlayerRotation();
+        
 
         isGrounded = (Physics.CheckSphere(transform.position + controller.center - new Vector3(0, controller.height / 2 - groundOffset, 0), groundDistance, groundMask)) || controller.isGrounded;
 
         //preserve momentem
-        moveDirection = transform.InverseTransformDirection(moveDirection);
-        zSpeed = moveDirection.z;
-        xSpeed = moveDirection.x;
+        localDirection = transform.InverseTransformDirection(moveDirection);
+        zSpeed = localDirection.z;
+        xSpeed = localDirection.x;
 
         //handle headbonk and on ground y velocity
         if (isGrounded && velocity.y < 0)
         {
             //print("Grounded?");
-            velocity.y = -0f;
+            velocity.y = -0.05f;
         }
         else if (controller.collisionFlags == CollisionFlags.Above && ascending)
         {
@@ -211,64 +284,7 @@ public class ThridPersonController : MonoBehaviour
         }
 
 
-        if (isGrounded)
-        {
-            //print("on ground");
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                run = !run;
-                crouch = false;
-                if (run)
-                {
-                    speedMultiplyer = RUN_SPEED;
-                    speedLimit = RUN_SPEED;
-                }
-                else
-                {
-                    speedMultiplyer = WALK_SPEED;
-                    speedLimit = WALK_SPEED;
-                }
-            }
-            else if (Input.GetKeyDown("c"))
-            {
-                crouch = !crouch;
-                run = false;
-                if (crouch)
-                {
-                    speedMultiplyer = CROUCH_SPEED;
-                    speedLimit = CROUCH_SPEED;
-                }
-                else
-                {
-                    speedMultiplyer = WALK_SPEED;
-                    speedLimit = WALK_SPEED;
-                }
-
-            }
-
-
-
-
-
-
-            // attack can only be performed on ground
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                attack1 = true;
-                weapon.changeAttack(1);
-                Debug.Log("Attack 1!!");
-            }
-            else if (Input.GetKeyDown(KeyCode.K))
-            {
-                attack2 = true;
-                weapon.changeAttack(2);
-                Debug.Log("Attack 2!!");
-            }
-            //else if(!(animator.GetCurrentAnimatorStateInfo(0).IsName("attack1")||
-            //     animator.GetCurrentAnimatorStateInfo(0).IsName("attack2"))){
-            //     weapon.changeAttack(0);
-            // }
-        }
+        
 
         //handle  WASD inputs for SMOOTH 8way movement,
         if (Input.GetKey(KeyCode.W))
@@ -353,20 +369,13 @@ public class ThridPersonController : MonoBehaviour
             xSpeed = -speedLimit;
         }
 
-        moveDirection = new Vector3(xSpeed, 0, zSpeed);
-        moveDirection = transform.TransformDirection(moveDirection);
-
-        //print("after move velocity y is " + velocity.y);
-
-        controller.Move(moveDirection * Time.deltaTime * moveSpeed);
-
         velocity.y += gravity * Time.deltaTime;
 
-        controller.Move(velocity * Time.deltaTime);
+        
 
         //stores the global direction of the move to preserve momentem
 
-        updateAnimator();
+       
     }
 
     void handlePlayerRotation()
