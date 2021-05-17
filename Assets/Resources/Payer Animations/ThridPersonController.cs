@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ThridPersonController : MonoBehaviour
 {
+    public static ThridPersonController Instance;
     [SerializeField] private Vector3 moveDirection;
 
     [SerializeField] private Vector3 localDirection;
@@ -46,7 +47,7 @@ public class ThridPersonController : MonoBehaviour
 
     private bool attack1 = false;
     private bool attack2 = false;
-
+    bool stop;
 
     public Weapon weapon;
 
@@ -56,74 +57,94 @@ public class ThridPersonController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        stop = false;
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
+    public void ResumeMouseControl()
+    {
+        stop = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void DisableMouseControl()
+    {
+        stop = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
 
     void Update()
     {
-        handlePlayerRotation();
-        
-        if (isGrounded)
+        if (!stop)
         {
-            //print("on ground");
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            handlePlayerRotation();
+
+            if (isGrounded)
             {
-                run = !run;
-                crouch = false;
-                if (run)
+                //print("on ground");
+                if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
-                    speedMultiplyer = RUN_SPEED;
-                    speedLimit = RUN_SPEED;
+                    run = !run;
+                    crouch = false;
+                    if (run)
+                    {
+                        speedMultiplyer = RUN_SPEED;
+                        speedLimit = RUN_SPEED;
+                    }
+                    else
+                    {
+                        speedMultiplyer = WALK_SPEED;
+                        speedLimit = WALK_SPEED;
+                    }
                 }
-                else
+                else if (Input.GetKeyDown("c"))
                 {
-                    speedMultiplyer = WALK_SPEED;
-                    speedLimit = WALK_SPEED;
+                    crouch = !crouch;
+                    run = false;
+                    if (crouch)
+                    {
+                        speedMultiplyer = CROUCH_SPEED;
+                        speedLimit = CROUCH_SPEED;
+                    }
+                    else
+                    {
+                        speedMultiplyer = WALK_SPEED;
+                        speedLimit = WALK_SPEED;
+                    }
+
                 }
-            }
-            else if (Input.GetKeyDown("c"))
-            {
-                crouch = !crouch;
-                run = false;
-                if (crouch)
+
+
+
+
+
+
+                // attack can only be performed on ground
+                if (Input.GetKeyDown(KeyCode.J))
                 {
-                    speedMultiplyer = CROUCH_SPEED;
-                    speedLimit = CROUCH_SPEED;
+                    attack1 = true;
+                    weapon.changeAttack(1);
+                    Debug.Log("Attack 1!!");
                 }
-                else
+                else if (Input.GetKeyDown(KeyCode.K))
                 {
-                    speedMultiplyer = WALK_SPEED;
-                    speedLimit = WALK_SPEED;
+                    attack2 = true;
+                    weapon.changeAttack(2);
+                    Debug.Log("Attack 2!!");
                 }
-
+                //else if(!(animator.GetCurrentAnimatorStateInfo(0).IsName("attack1")||
+                //     animator.GetCurrentAnimatorStateInfo(0).IsName("attack2"))){
+                //     weapon.changeAttack(0);
+                // }
             }
-
-
-
-
-
-
-            // attack can only be performed on ground
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                attack1 = true;
-                weapon.changeAttack(1);
-                Debug.Log("Attack 1!!");
-            }
-            else if (Input.GetKeyDown(KeyCode.K))
-            {
-                attack2 = true;
-                weapon.changeAttack(2);
-                Debug.Log("Attack 2!!");
-            }
-            //else if(!(animator.GetCurrentAnimatorStateInfo(0).IsName("attack1")||
-            //     animator.GetCurrentAnimatorStateInfo(0).IsName("attack2"))){
-            //     weapon.changeAttack(0);
-            // }
+            Move();
+            updateAnimator();
         }
-        Move();
-        updateAnimator();
     }
 
 
