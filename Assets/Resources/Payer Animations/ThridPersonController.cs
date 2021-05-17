@@ -60,7 +60,7 @@ public class ThridPersonController : MonoBehaviour
 
     void Update()
     {
-        Move();
+        
     }
 
 
@@ -68,7 +68,7 @@ public class ThridPersonController : MonoBehaviour
     void FixedUpdate()
     {
 
-        //print("right feet: "+ animator.rightFeetBottomHeight + " left feet: " + animator.leftFeetBottomHeight);
+        Move();//print("right feet: "+ animator.rightFeetBottomHeight + " left feet: " + animator.leftFeetBottomHeight);
     }
 
     void Move()
