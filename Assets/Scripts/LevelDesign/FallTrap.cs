@@ -25,7 +25,7 @@ public class FallTrap : MonoBehaviour
     void OnCollisionEnter(Collision other){
         if (other.gameObject.tag == "Player"){
             player = other.gameObject;
-            player.GetComponent<UnityChanSimpleController>().damage(damageValue);
+            InterfaceController.Instance.Damage(10, false);
             StartCoroutine(goingToDestroy());
         }
     }
