@@ -586,7 +586,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   forth_back: 1
-  sound_radius: 10
+  sound_radius: 3
   sight_radius: 30
   rotate_speed: 10
   walk_speed: 2

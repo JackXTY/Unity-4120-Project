@@ -151,7 +151,17 @@ public class MonsterManager : MonoBehaviour
     bool canSensePlayer()
     {
         Vector3 heading = ForceSameLevel(player.transform.position) - transform.position;
-        if (heading.sqrMagnitude < sound_radius * sound_radius) return true;
+        if (heading.sqrMagnitude < sound_radius * sound_radius){
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, (player.transform.position - transform.position), out hit, sound_radius)) //cast ray to see if obstacle in between is present
+            {
+                if (hit.transform.gameObject.tag == "Player")
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         Quaternion rotation = Quaternion.LookRotation(ForceSameLevel(player.transform.position) - transform.position);
         //Debug.Log(rotation.eulerAngles.y);
         if (heading.sqrMagnitude < sight_radius * sight_radius && (rotation.eulerAngles.y - 90 <= FOV/2 || rotation.eulerAngles.y - 90 >= 360f - FOV/2))   
@@ -160,8 +170,9 @@ public class MonsterManager : MonoBehaviour
             RaycastHit hit;
             //Physics.IgnoreRaycastLayer(8);
             if (Physics.Raycast(transform.position, (player.transform.position - transform.position), out hit, sight_radius)) //cast ray to see if obstacle in between is present
-            {              
-                if (hit.transform.gameObject == player)
+            {
+                //Debug.Log(hit.transform.gameObject.name);//LayerMask.GetMask("Obstacles")
+                if (hit.transform.gameObject.tag == "Player")
                 {
                     return true;
                 }
