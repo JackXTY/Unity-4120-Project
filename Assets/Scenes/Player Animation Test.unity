@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000002, guid: 256e5597222784c4bbc76e49120c1dbc,
+  m_LightingDataAsset: {fileID: 112000000, guid: 256e5597222784c4bbc76e49120c1dbc,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -847,7 +847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9583105afc7bcf54e84d98fc70f54fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Area B
+  sceneName: Area A
 --- !u!1 &1094349470
 GameObject:
   m_ObjectHideFlags: 0
