@@ -12,17 +12,16 @@ public class Weapon : MonoBehaviour
 
     public void changeAttack(int way){
         attackWay = way;
-        Debug.Log("change " + way);
+        //Debug.Log("change " + way);
     }
 
     private void OnTriggerEnter(Collider other){
-        Debug.Log(other.name);
         if(other.tag=="Monster" && attackWay!=0){
             int attackValue = attack1;
             if(attackWay == 2){
                 attackValue = attack2;
             }
-            other.gameObject.GetComponent<MonsterController>().hit(attackValue);
+            other.gameObject.GetComponent<MonsterManager>().hit(attackValue);
         }
     }
 }

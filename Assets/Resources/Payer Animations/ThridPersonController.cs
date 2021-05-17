@@ -57,10 +57,13 @@ public class ThridPersonController : MonoBehaviour
     }
 
     // Update is called once per frame
+
     void Update()
     {
         Move();
     }
+
+
 
     void FixedUpdate()
     {

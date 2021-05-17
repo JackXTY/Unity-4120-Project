@@ -26,13 +26,13 @@ public class RotatedPlatform : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision other){
+    void OnTriggerEnter(Collider other){
         if(other.gameObject.tag == "Player"){
             player = other.gameObject;
         }
     }
 
-    void OnCollisionExit(Collision other){
+    void OnTriggerExit(Collider other){
         if(other.gameObject.tag == "Player"){
             player = null;
         }
