@@ -325,7 +325,7 @@ public class InterfaceController : MonoBehaviour
         GameObject temp = Instantiate(scratch, damage_aura[0].transform.parent);
     }
 
-    public void Damage(int damage_point)
+    public void Damage(int damage_point, bool if_scratch)
     {
         //int damage_point = 10;
         health -= damage_point;
@@ -339,7 +339,10 @@ public class InterfaceController : MonoBehaviour
             die();
         }
         damage_alpha = 0.24f;
-        GameObject temp = Instantiate(scratch, damage_aura[0].transform.parent);
+        if(if_scratch){
+            GameObject temp = Instantiate(scratch, damage_aura[0].transform.parent);
+        }
+        
     }
 
     public void Heal(float heal_point)

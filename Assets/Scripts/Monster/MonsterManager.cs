@@ -45,6 +45,7 @@ public class MonsterManager : MonoBehaviour
             pos.y = transform.position.y;
             pt.transform.position = pos;
         }
+        current_target_waypoint = ClosestWayPoint();
     }
 
     
@@ -73,7 +74,7 @@ public class MonsterManager : MonoBehaviour
                         GetComponent<Animator>().SetFloat("Turn", 0);
                         GetComponent<Animator>().SetFloat("Forward", 0);
                         GetComponent<Animator>().SetTrigger("CloseAttack");
-                        InterfaceController.Instance.Damage(10);
+                        InterfaceController.Instance.Damage(10, true);
                         inner_clock++;
                     }
                     else

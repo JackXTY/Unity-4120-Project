@@ -24,7 +24,9 @@ public class Shell : MonoBehaviour
 
     private void OnTriggerEnter(Collider col){
         if(col.tag == "Player"){
-            col.gameObject.GetComponent<UnityChanSimpleController>().damage(damage);
+            InterfaceController.Instance.Damage(10, false);
+            Debug.Log("hit by bullet!");
+            // col.gameObject.GetComponent<UnityChanSimpleController>().damage(damage);
         }
         Destroy(this.gameObject);
     }
