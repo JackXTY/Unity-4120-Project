@@ -88,7 +88,7 @@ public class MovingPlatform : MonoBehaviour
             player = col.gameObject;
             begin = true;
             //player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePosition;
-            Debug.Log("Enter Player Collision");
+            Debug.Log("Platform begin to move!");
         }
     }
 

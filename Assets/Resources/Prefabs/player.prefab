@@ -1151,6 +1151,7 @@ GameObject:
   - component: {fileID: 2137713598764557789}
   - component: {fileID: 5530484770124078967}
   - component: {fileID: 5530484770124078966}
+  - component: {fileID: 5105415058777496198}
   m_Layer: 10
   m_Name: player
   m_TagString: Player
@@ -1244,6 +1245,20 @@ MonoBehaviour:
   isGrounded: 1
   previouslyGrounded: 1
   weapon: {fileID: 8553073411113288748}
+--- !u!136 &5105415058777496198
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612059067378017565}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5043302
+  m_Height: 1.9344568
+  m_Direction: 1
+  m_Center: {x: -0.016563237, y: 0.9003906, z: -0.009557962}
 --- !u!1 &4804870629991559481
 GameObject:
   m_ObjectHideFlags: 0
