@@ -123,7 +123,7 @@ public class ThridPersonController : MonoBehaviour
             // }
         }
         Move();
-         updateAnimator();
+        updateAnimator();
     }
 
 
