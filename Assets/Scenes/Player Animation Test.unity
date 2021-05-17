@@ -1397,6 +1397,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
+    - target: {fileID: 8331269424256164529, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_UpdateMethod
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331269424256164529, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_BlendUpdateMethod
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331269424256164529, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_DefaultBlend.m_Style
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331269424552213941, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331269424552213941, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331269424552213941, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331269425970392662, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5999999
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf2b6095718638b44a566cfc2a8905c4, type: 3}
 --- !u!1 &2035210954192886964 stripped
