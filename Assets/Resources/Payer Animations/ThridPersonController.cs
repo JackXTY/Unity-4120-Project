@@ -23,7 +23,9 @@ public class ThridPersonController : MonoBehaviour
     [SerializeField] private float zSpeed = 0f;
     [SerializeField] private float xSpeed = 0f;
     private Vector2 turn;
+    [SerializeField] public float initialRotation;
     private Vector3 jumpDirection;
+    private bool isMoving = false;
 
     [SerializeField] public float gravity;
     [SerializeField] public float groundDistance;
@@ -31,7 +33,6 @@ public class ThridPersonController : MonoBehaviour
     [SerializeField] public LayerMask groundMask;
     [SerializeField] private Vector3 velocity;
     [SerializeField] public float jumpVelocity;
-    [SerializeField] private Vector3 globalDirection;
 
     [SerializeField] private bool isGrounded;
     private float fall = -1f;
@@ -49,7 +50,18 @@ public class ThridPersonController : MonoBehaviour
     private bool attack2 = false;
     bool stop;
 
+    private InterfaceController ui;
+
     public Weapon weapon;
+
+    [SerializeField] public float maxStamina;
+    [SerializeField] private float stamina;
+    [SerializeField] public float runCost;
+    [SerializeField] public float sprintCost;
+    [SerializeField] public float sprintTimeLimit;
+    [SerializeField] public float jumpCost;
+    [SerializeField] public float airJumpCost;
+    [SerializeField] public float staminaRecoveryRate;
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +74,10 @@ public class ThridPersonController : MonoBehaviour
         {
             Instance = this;
         }
+        turn.x = transform.rotation.eulerAngles.y;
+        ui = GameObject.Find("InterfaceCanvas").GetComponent<InterfaceController>();
+        stamina = 100f; 
+        ui.SetStamina(1f);
     }
 
     public void ResumeMouseControl()
@@ -87,7 +103,7 @@ public class ThridPersonController : MonoBehaviour
             if (isGrounded)
             {
                 //print("on ground");
-                if (Input.GetKeyDown(KeyCode.LeftShift))
+                if (Input.GetKeyDown(KeyCode.LeftShift) && stamina >= 0)
                 {
                     run = !run;
                     crouch = false;
@@ -142,8 +158,29 @@ public class ThridPersonController : MonoBehaviour
                 //     weapon.changeAttack(0);
                 // }
             }
+
+            if(stamina <= 100 && stamina >= 0){
+                if(run && isGrounded){
+                stamina -= runCost * Time.deltaTime;
+                }else if(isGrounded){
+                    stamina += staminaRecoveryRate * Time.deltaTime;
+                }
+            }
+            
+            if(stamina > 100){
+                stamina = 100;
+            }else if(stamina < 0){
+                stamina = 0;
+                run = false;
+            }
+            
+
+            
             Move();
             updateAnimator();
+
+            
+
         }
     }
 
@@ -151,18 +188,22 @@ public class ThridPersonController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!stop){
+            
+            transform.rotation = Quaternion.Euler(0f, turn.x, 0);
 
-        //print("right feet: "+ animator.rightFeetBottomHeight + " left feet: " + animator.leftFeetBottomHeight);
-        moveDirection = new Vector3(xSpeed, 0, zSpeed);
-        moveDirection = transform.TransformDirection(moveDirection);
+            //print("right feet: "+ animator.rightFeetBottomHeight + " left feet: " + animator.leftFeetBottomHeight);
+            moveDirection = new Vector3(xSpeed, 0, zSpeed);
+            moveDirection = transform.TransformDirection(moveDirection);
 
-        //print("after move velocity y is " + velocity.y);
+            //print("after move velocity y is " + velocity.y);
 
-        controller.Move(moveDirection * Time.deltaTime * moveSpeed);
+            controller.Move(moveDirection * Time.deltaTime * moveSpeed + velocity * Time.deltaTime);
 
-        
+            ui.SetStamina(stamina/maxStamina);
 
-        controller.Move(velocity * Time.deltaTime);
+            
+        }
     }
 
     void Move()
@@ -231,8 +272,9 @@ public class ThridPersonController : MonoBehaviour
         //TODO: disable jump rotation
         if (isGrounded)
         {
+            airJump = false;
+
             if(speedMultiplyer == AIR_SPEED){
-                airJump = false;
                 if(run){
                     speedLimit = RUN_SPEED;
                     speedMultiplyer = RUN_SPEED;
@@ -242,13 +284,13 @@ public class ThridPersonController : MonoBehaviour
                 }
             }
             
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && stamina >= jumpCost * 0.9)
             {
                 jumpDirection = transform.forward;
-
+                stamina -= jumpCost;
                 jump = true;
                 print("pressed jump");
-                velocity.y += jumpVelocity;
+                velocity.y = jumpVelocity;
                 if (Input.GetKey(KeyCode.W))
                 {
                     zSpeed += Z_ACC * WALK_SPEED * 0.2f;
@@ -274,11 +316,12 @@ public class ThridPersonController : MonoBehaviour
             }
             
         }
-        else if (!isGrounded && !airJump)
+        else if (!isGrounded && !airJump && stamina >= airJumpCost * 0.9)
         {
             
             if (Input.GetButtonDown("Jump"))
             {
+                stamina -= airJumpCost;
                 jump = true;
                 airJump = true;
                 print("pressed air jump");
@@ -310,6 +353,7 @@ public class ThridPersonController : MonoBehaviour
         //handle  WASD inputs for SMOOTH 8way movement,
         if (Input.GetKey(KeyCode.W))
         {
+            isMoving = true;
             if (!Input.GetKey(KeyCode.S))
             {
                 zSpeed += Time.deltaTime * Z_ACC * speedMultiplyer;
@@ -321,6 +365,7 @@ public class ThridPersonController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.S))
         {
+            isMoving = true;
             zSpeed -= Time.deltaTime * Z_ACC * speedMultiplyer;
             if (zSpeed > 0 && isGrounded)
             {
@@ -341,6 +386,7 @@ public class ThridPersonController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
+            isMoving = true;
             if (!Input.GetKey(KeyCode.D))
             {
                 xSpeed -= Time.deltaTime * X_ACC * speedMultiplyer;
@@ -352,6 +398,7 @@ public class ThridPersonController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.D))
         {
+            isMoving = true;
             xSpeed += Time.deltaTime * X_ACC * speedMultiplyer;
             if (xSpeed < 0 && isGrounded)
             {
@@ -370,6 +417,11 @@ public class ThridPersonController : MonoBehaviour
             xSpeed = 0;
         }
 
+        if(!isMoving && run){
+            run = false;
+        }
+
+        isMoving = false;
 
         //handle speed limit problem,this could be done bofefore handling inputs performed both in air and on ground
         if (zSpeed > speedLimit)
@@ -404,7 +456,7 @@ public class ThridPersonController : MonoBehaviour
         turn.x += Input.GetAxis("Mouse X");
         turn.y += Input.GetAxis("Mouse Y");
         //TODO: look up and look down
-        transform.rotation = Quaternion.Euler(0f, turn.x, 0);
+
     }
 
     void updateAnimator()
