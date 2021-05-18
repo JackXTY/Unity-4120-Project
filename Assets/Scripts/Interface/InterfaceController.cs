@@ -41,6 +41,8 @@ public class InterfaceController : MonoBehaviour
     public Image HPBarFill;
     public Image StaminaBarFill;
 
+    public GameObject start_menu;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -54,6 +56,7 @@ public class InterfaceController : MonoBehaviour
             Destroy(gameObject);
         }
         InitializePlayerStats();
+        
     }
 
     public void InitializePlayerStats()

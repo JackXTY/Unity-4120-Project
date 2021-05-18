@@ -80,12 +80,18 @@ public class ThridPersonController : MonoBehaviour
         // ui = GameObject.Find("InterfaceCanvas").GetComponent<InterfaceController>();
         // stamina = 100f; 
         // ui.SetStamina(1f);
+
+        if (InterfaceController.Instance.start_menu.active)   //at the start of the game
+        {
+            ResumeMouseControl();    //open mouse control
+        }
     }
 
     public void ResumeMouseControl()
     {
         stop = true;
         Cursor.lockState = CursorLockMode.None;
+        Debug.Log("can use mouse!");
     }
 
     public void DisableMouseControl()

@@ -805,6 +805,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 94255807}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &96518949 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3973191776773080675, guid: 004db55d13ce1cd4a8cdfde4790b5155,
+    type: 3}
+  m_PrefabInstance: {fileID: 1048158224}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &109188845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7285,6 +7291,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3973191776773080675, guid: 004db55d13ce1cd4a8cdfde4790b5155,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330980939478376907, guid: 004db55d13ce1cd4a8cdfde4790b5155,
+        type: 3}
+      propertyPath: start_menu
+      value: 
+      objectReference: {fileID: 96518949}
     - target: {fileID: 7330980939478376944, guid: 004db55d13ce1cd4a8cdfde4790b5155,
         type: 3}
       propertyPath: m_Name
@@ -8976,6 +8992,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -2.5000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: runCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: sprintCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: jumpCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: airJumpCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: staminaRecoveryRate
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf2b6095718638b44a566cfc2a8905c4, type: 3}
