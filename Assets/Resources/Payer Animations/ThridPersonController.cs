@@ -208,7 +208,7 @@ public class ThridPersonController : MonoBehaviour
             //print("after move velocity y is " + velocity.y);
 
             controller.Move(moveDirection * Time.deltaTime * moveSpeed + velocity * Time.deltaTime);
-            Debug.Log("stamina: "+stamina.ToString());
+            //Debug.Log("stamina: "+stamina.ToString());
             InterfaceController.Instance.SetStamina(stamina/maxStamina);
 
             
