@@ -1311,7 +1311,7 @@ GameObject:
   - component: {fileID: 5095473857463431126}
   - component: {fileID: 5525049309911673382}
   m_Layer: 10
-  m_Name: vanguard 1
+  m_Name: Vanguard
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1384,6 +1384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0, z: 0}
+  localDirection: {x: 0, y: 0, z: 0}
   WALK_SPEED: 0.7
   CROUCH_SPEED: 0.4
   RUN_SPEED: 1.1
@@ -1395,6 +1396,7 @@ MonoBehaviour:
   speedMultiplyer: 0.7
   zSpeed: 0
   xSpeed: 0
+  initialRotation: 0
   gravity: -12
   groundDistance: 0.25
   groundOffset: 0.15
@@ -1403,10 +1405,17 @@ MonoBehaviour:
     m_Bits: 256
   velocity: {x: 0, y: 0, z: 0}
   jumpVelocity: 13
-  globalDirection: {x: 0, y: 0, z: 0}
   isGrounded: 1
   previouslyGrounded: 1
   weapon: {fileID: 8990422987084575884}
+  maxStamina: 0
+  stamina: 0
+  runCost: 0
+  sprintCost: 0
+  sprintTimeLimit: 0
+  jumpCost: 0
+  airJumpCost: 0
+  staminaRecoveryRate: 0
 --- !u!136 &5525049309911673382
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1418,9 +1427,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5043302
-  m_Height: 1.9344568
+  m_Height: 1.8958337
   m_Direction: 1
-  m_Center: {x: -0.016563237, y: 0.9003906, z: -0.009557962}
+  m_Center: {x: -0.016563237, y: 0.9197022, z: -0.009557962}
 --- !u!1 &5870088700825360487
 GameObject:
   m_ObjectHideFlags: 0
