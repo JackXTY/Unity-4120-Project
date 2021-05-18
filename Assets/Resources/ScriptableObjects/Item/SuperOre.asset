@@ -17,3 +17,4 @@ MonoBehaviour:
   description: Alien ore processed with alien technology. Very valuable.
   usage: collect
   usage_value: 100
+  score: 100

@@ -17,3 +17,4 @@ MonoBehaviour:
   description: This miracle potion can get rid of all wounds instantly.
   usage: full_heal
   usage_value: 0
+  score: 20

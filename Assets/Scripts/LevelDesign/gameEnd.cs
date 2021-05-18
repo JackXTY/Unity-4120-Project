@@ -34,18 +34,20 @@ public class gameEnd : MonoBehaviour
         if (heading.sqrMagnitude < 0.4)
         {
             end = true;
+            InterfaceController.Instance.end_menu.GetComponent<EndMenu>().EndGame();
+
         }
-    	if (end == true)
-    	{
-    		if (!myText.enabled)
-    			EnableText();
-    		if (myText.enabled && (Time.time > timeWhenDisappear))
-		    {
-		        myText.enabled = false;
-		        Application.Quit();
-		        Debug.Log("quit game");
-		    }
-    	}
+    	//if (end == true)
+    	//{
+    	//	if (!myText.enabled)
+    	//		EnableText();
+    	//	if (myText.enabled && (Time.time > timeWhenDisappear))
+		   // {
+		   //     myText.enabled = false;
+		   //     Application.Quit();
+		   //     Debug.Log("quit game");
+		   // }
+    	//}
     }
 
 }
