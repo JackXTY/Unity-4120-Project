@@ -365,6 +365,17 @@ public class InterfaceController : MonoBehaviour
         
     }
 
+    public void SetStamina(float percentage)
+    {
+
+        //HPBarFill.fillAmount = (float)health / max_health;
+        StaminaBarFill.GetComponent<BarChange>().ChangeTo(percentage);
+        //StaminaBarFill.GetComponentInChildren<Flash>().StartFlash();
+
+        SetInterfaceColor();
+        
+    }
+
     public void ExitGame()
     {
         Debug.Log("Quitting game");

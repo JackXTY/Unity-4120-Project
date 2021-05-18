@@ -1427,10 +1427,100 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 8.02
       objectReference: {fileID: 0}
+    - target: {fileID: 8331269425970392661, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 68
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331269425970392662, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8331269425970392662, guid: cf2b6095718638b44a566cfc2a8905c4,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.5999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331269425970392662, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775666415426261321, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775666415426261321, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775666415426261321, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775666415426261321, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775666415426261321, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: X_ACC
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: Z_ACC
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: runCost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: stamina
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: jumpCost
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: maxStamina
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: sprintCost
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: airJumpCost
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: initialRotation
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: staminaRecoveryRate
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf2b6095718638b44a566cfc2a8905c4, type: 3}
