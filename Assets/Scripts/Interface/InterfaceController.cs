@@ -364,11 +364,22 @@ public class InterfaceController : MonoBehaviour
     {
 
         //HPBarFill.fillAmount = (float)health / max_health;
+        //Debug.Log("stamina " + percentage.ToString());
         StaminaBarFill.GetComponent<BarChange>().ChangeTo(percentage);
         //StaminaBarFill.GetComponentInChildren<Flash>().StartFlash();
+        stamina = (int)(max_stamina * percentage);
 
         SetInterfaceColor();
         
+    }
+
+    public bool UseStamina(int stamina_point){
+        if(stamina_point > stamina){
+            return false;
+        }else{
+            HPBarFill.GetComponent<BarChange>().ChangeTo((float)stamina / max_stamina);
+            return true;
+        }
     }
 
     public void ExitGame()
