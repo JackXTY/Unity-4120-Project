@@ -54,15 +54,20 @@ public class InterfaceController : MonoBehaviour
             Destroy(gameObject);
         }
         InitializePlayerStats();
+        StartMenu();
     }
+
+    public void StartMenu()
+    {
+
+    }
+
+    public void DeadMenu();
 
     public void InitializePlayerStats()
     {
         //temporary, modify later
         health = max_health = stamina = max_stamina = 100;
-
-
-
         SetInterfaceColor();
     }
 
