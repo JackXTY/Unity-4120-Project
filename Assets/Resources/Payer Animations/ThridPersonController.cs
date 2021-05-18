@@ -75,8 +75,8 @@ public class ThridPersonController : MonoBehaviour
             Instance = this;
         }
         turn.x = transform.rotation.eulerAngles.y;
-        ui = GameObject.Find("InterfaceCanvas").GetComponent<InterfaceController>();
-        stamina = 100f; 
+        ui = InterfaceController.Instance;
+        maxStamina = stamina = 100f; 
         ui.SetStamina(1f);
     }
 
@@ -201,7 +201,7 @@ public class ThridPersonController : MonoBehaviour
             controller.Move(moveDirection * Time.deltaTime * moveSpeed + velocity * Time.deltaTime);
 
             ui.SetStamina(stamina/maxStamina);
-
+            Debug.Log(stamina);
             
         }
     }

@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour
                 InterfaceController.Instance.Heal((int) item.usage_value);
                 ConsumeItem(item);
                 break;
+            case "restore":
+                InterfaceController.Instance.Restore((int)item.usage_value);
+                ConsumeItem(item);
+                break;
         }
     }
 

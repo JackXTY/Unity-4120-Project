@@ -41,6 +41,9 @@ public class InterfaceController : MonoBehaviour
     public Image HPBarFill;
     public Image StaminaBarFill;
 
+    public GameObject start_menu;
+    public GameObject start_game_dialogue;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -54,15 +57,18 @@ public class InterfaceController : MonoBehaviour
             Destroy(gameObject);
         }
         InitializePlayerStats();
-        StartMenu();
+        //StartMenu();
     }
 
-    public void StartMenu()
+    public void StartGame()
     {
 
     }
 
-    public void DeadMenu();
+    public void DeadMenu()
+    {
+
+    }
 
     public void InitializePlayerStats()
     {
@@ -365,11 +371,18 @@ public class InterfaceController : MonoBehaviour
         
     }
 
+    public void Restore(float restore_point)
+    {
+        stamina += (int)restore_point;
+        if (stamina > max_stamina) stamina = max_stamina;
+        StaminaBarFill.fillAmount = (float)stamina/max_stamina;
+    }
+
     public void SetStamina(float percentage)
     {
-
-        //HPBarFill.fillAmount = (float)health / max_health;
-        StaminaBarFill.GetComponent<BarChange>().ChangeTo(percentage);
+        //Debug.Log(percentage);
+        StaminaBarFill.fillAmount = percentage;
+        //StaminaBarFill.GetComponent<BarChange>().ChangeTo(percentage);
         //StaminaBarFill.GetComponentInChildren<Flash>().StartFlash();
 
         SetInterfaceColor();
@@ -385,6 +398,7 @@ public class InterfaceController : MonoBehaviour
     public void die()
     {
         Debug.Log("You have died!");
+        DeadMenu();
     }
 
     public void heal(int heal_point)
