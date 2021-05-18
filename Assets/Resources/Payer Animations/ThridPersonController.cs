@@ -209,6 +209,11 @@ public class ThridPersonController : MonoBehaviour
         }
     }
 
+    public void SetStamina(float value)
+    {
+        stamina = value;
+    }
+
     void Move()
     {
         

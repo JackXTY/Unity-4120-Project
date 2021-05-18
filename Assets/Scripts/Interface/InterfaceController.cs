@@ -360,6 +360,15 @@ public class InterfaceController : MonoBehaviour
         
     }
 
+    public void Restore(float restore_point)
+    {
+        stamina += (int)restore_point;       
+        if (stamina > max_stamina) stamina = max_stamina;
+        ThridPersonController.Instance.SetStamina(stamina);
+
+        StaminaBarFill.GetComponent<BarChange>().ChangeTo((float)stamina / max_stamina);
+    }
+
     public void SetStamina(float percentage)
     {
 
