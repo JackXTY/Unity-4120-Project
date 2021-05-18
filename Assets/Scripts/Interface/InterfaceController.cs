@@ -41,9 +41,6 @@ public class InterfaceController : MonoBehaviour
     public Image HPBarFill;
     public Image StaminaBarFill;
 
-    public GameObject start_menu;
-    public GameObject start_game_dialogue;
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -57,23 +54,15 @@ public class InterfaceController : MonoBehaviour
             Destroy(gameObject);
         }
         InitializePlayerStats();
-        //StartMenu();
-    }
-
-    public void StartGame()
-    {
-
-    }
-
-    public void DeadMenu()
-    {
-
     }
 
     public void InitializePlayerStats()
     {
         //temporary, modify later
         health = max_health = stamina = max_stamina = 100;
+
+
+
         SetInterfaceColor();
     }
 
@@ -371,22 +360,26 @@ public class InterfaceController : MonoBehaviour
         
     }
 
-    public void Restore(float restore_point)
-    {
-        stamina += (int)restore_point;
-        if (stamina > max_stamina) stamina = max_stamina;
-        StaminaBarFill.fillAmount = (float)stamina/max_stamina;
-    }
-
     public void SetStamina(float percentage)
     {
-        //Debug.Log(percentage);
-        StaminaBarFill.fillAmount = percentage;
-        //StaminaBarFill.GetComponent<BarChange>().ChangeTo(percentage);
+
+        //HPBarFill.fillAmount = (float)health / max_health;
+        //Debug.Log("stamina " + percentage.ToString());
+        StaminaBarFill.GetComponent<BarChange>().ChangeTo(percentage);
         //StaminaBarFill.GetComponentInChildren<Flash>().StartFlash();
+        stamina = (int)(max_stamina * percentage);
 
         SetInterfaceColor();
         
+    }
+
+    public bool UseStamina(int stamina_point){
+        if(stamina_point > stamina){
+            return false;
+        }else{
+            HPBarFill.GetComponent<BarChange>().ChangeTo((float)stamina / max_stamina);
+            return true;
+        }
     }
 
     public void ExitGame()
@@ -398,7 +391,6 @@ public class InterfaceController : MonoBehaviour
     public void die()
     {
         Debug.Log("You have died!");
-        DeadMenu();
     }
 
     public void heal(int heal_point)

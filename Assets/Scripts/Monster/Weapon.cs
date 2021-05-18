@@ -15,6 +15,16 @@ public class Weapon : MonoBehaviour
         //Debug.Log("change " + way);
     }
 
+    public void setWeapon(){
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<ThridPersonController>().weapon = this;
+        GameObject hand = GameObject.Find("Player/Vanguard/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand");
+        Debug.Log(hand.name);
+        this.gameObject.transform.parent = hand.transform;
+        // GameObject oldWeapon = GameObject.FindGameObjectWithTag("Weapon");
+        // Destroy(oldWeapon);
+    }
+
     private void OnTriggerEnter(Collider other){
         if(other.tag=="Monster" && attackWay!=0){
             int attackValue = attack1;

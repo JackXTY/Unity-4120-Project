@@ -50,12 +50,12 @@ public class ThridPersonController : MonoBehaviour
     private bool attack2 = false;
     bool stop;
 
-    private InterfaceController ui;
+    //private InterfaceController ui;
 
     public Weapon weapon;
 
-    [SerializeField] public float maxStamina;
-    [SerializeField] private float stamina;
+    private float maxStamina;
+    private float stamina;
     [SerializeField] public float runCost;
     [SerializeField] public float sprintCost;
     [SerializeField] public float sprintTimeLimit;
@@ -75,9 +75,11 @@ public class ThridPersonController : MonoBehaviour
             Instance = this;
         }
         turn.x = transform.rotation.eulerAngles.y;
-        ui = InterfaceController.Instance;
-        maxStamina = stamina = 100f; 
-        ui.SetStamina(1f);
+        maxStamina = (int) InterfaceController.Instance.max_stamina;
+        stamina = (int)InterfaceController.Instance.stamina;
+        // ui = GameObject.Find("InterfaceCanvas").GetComponent<InterfaceController>();
+        // stamina = 100f; 
+        // ui.SetStamina(1f);
     }
 
     public void ResumeMouseControl()
@@ -161,7 +163,8 @@ public class ThridPersonController : MonoBehaviour
 
             if(stamina <= 100 && stamina >= 0){
                 if(run && isGrounded){
-                stamina -= runCost * Time.deltaTime;
+                    Debug.Log("stamina decrease");
+                    stamina -= runCost * Time.deltaTime;
                 }else if(isGrounded){
                     stamina += staminaRecoveryRate * Time.deltaTime;
                 }
@@ -199,9 +202,9 @@ public class ThridPersonController : MonoBehaviour
             //print("after move velocity y is " + velocity.y);
 
             controller.Move(moveDirection * Time.deltaTime * moveSpeed + velocity * Time.deltaTime);
+            Debug.Log("stamina: "+stamina.ToString());
+            InterfaceController.Instance.SetStamina(stamina/maxStamina);
 
-            ui.SetStamina(stamina/maxStamina);
-            Debug.Log(stamina);
             
         }
     }
