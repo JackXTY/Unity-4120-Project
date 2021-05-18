@@ -1408,14 +1408,12 @@ MonoBehaviour:
   isGrounded: 1
   previouslyGrounded: 1
   weapon: {fileID: 8990422987084575884}
-  maxStamina: 0
-  stamina: 0
-  runCost: 0
+  runCost: 5
   sprintCost: 0
   sprintTimeLimit: 0
   jumpCost: 0
   airJumpCost: 0
-  staminaRecoveryRate: 0
+  staminaRecoveryRate: 2
 --- !u!136 &5525049309911673382
 CapsuleCollider:
   m_ObjectHideFlags: 0
