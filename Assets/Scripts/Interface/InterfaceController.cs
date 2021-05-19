@@ -77,7 +77,7 @@ public class InterfaceController : MonoBehaviour
     {
         dialogue.GetComponent<Text>().text = sentence;
         dialogue.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         dialogue.SetActive(false);
     }
 
@@ -399,8 +399,14 @@ public class InterfaceController : MonoBehaviour
         if(if_scratch){
             GameObject temp = Instantiate(scratch, damage_aura[0].transform.parent);
         }
-
-        InterfaceController.Instance.Dialogue("Ouch! It hurts!");
+        if (health > 0)
+        {
+            InterfaceController.Instance.Dialogue("Ouch! It hurts!");
+        }
+        else
+        {
+            InterfaceController.Instance.Dialogue("No! This can't be the end......");
+        }
 
     }
 
