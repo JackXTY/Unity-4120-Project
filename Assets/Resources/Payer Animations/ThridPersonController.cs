@@ -146,8 +146,9 @@ public class ThridPersonController : MonoBehaviour
 
         isGrounded = (Physics.CheckSphere(transform.position + controller.center - new Vector3(0, controller.height / 2 - groundOffset, 0), groundDistance, groundMask)) || controller.isGrounded;
 
-        //preserve momentem
+        
         if(!inAttack){
+            //preserve momentem
             localDirection = transform.InverseTransformDirection(moveDirection);
             zSpeed = localDirection.z;
             xSpeed = localDirection.x;
@@ -267,6 +268,8 @@ public class ThridPersonController : MonoBehaviour
 
             if (Input.GetButtonDown("Jump"))
             {
+                speedMultiplyer = AIR_SPEED;
+                speedLimit = RUN_SPEED;
                 stamina -= airJumpCost;
                 jump = true;
                 airJump = true;
@@ -291,10 +294,13 @@ public class ThridPersonController : MonoBehaviour
                 //animator.SetTrigger("Jump");
 
             }
+        }else {
+            speedMultiplyer = AIR_SPEED;
+            speedLimit = RUN_SPEED;
         }
 
 
-        if (isGrounded && !inAttack)
+        if (isGrounded && !inAttack && !jump)
         {
             //print("on ground");
             if (Input.GetKeyDown(KeyCode.LeftShift) && stamina >= 0)

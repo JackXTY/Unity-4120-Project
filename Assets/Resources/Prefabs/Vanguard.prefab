@@ -1420,9 +1420,9 @@ MonoBehaviour:
   CROUCH_SPEED: 0.4
   RUN_SPEED: 1.2
   AIR_SPEED: 0.2
-  X_ACC: 3
-  Z_ACC: 3
-  moveSpeed: 3
+  X_ACC: 5
+  Z_ACC: 5
+  moveSpeed: 4
   speedLimit: 0.7
   speedMultiplyer: 0.7
   zSpeed: 0
