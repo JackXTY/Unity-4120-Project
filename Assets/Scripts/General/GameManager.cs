@@ -24,14 +24,17 @@ public class GameManager : MonoBehaviour
             case "heal":
                 InterfaceController.Instance.Heal((int) item.usage_value);
                 ConsumeItem(item);
+                InterfaceController.Instance.Dialogue("Feeling much better now.");
                 break;
             case "restore":
                 InterfaceController.Instance.Restore((int)item.usage_value);
                 ConsumeItem(item);
+                InterfaceController.Instance.Dialogue("I am not as tired as I was anymore.");
                 break;
             case "full_heal":
                 InterfaceController.Instance.Heal(9999);
                 ConsumeItem(item);
+                InterfaceController.Instance.Dialogue("Wow...... This thing is really great!");
                 break;
         }
     }
@@ -48,6 +51,7 @@ public class GameManager : MonoBehaviour
             possessed_items.Add(item);
             item_count.Add(1);
         }
+        InterfaceController.Instance.Dialogue("This should be useful.");
     }
 
     public void ConsumeItem(Item item)
