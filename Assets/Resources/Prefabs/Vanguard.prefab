@@ -1107,6 +1107,36 @@ Transform:
   m_Father: {fileID: 1581740618135304169}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4434121256366225596
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3114891060183415442}
+  m_Layer: 0
+  m_Name: vanguard_shoulder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3114891060183415442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4434121256366225596}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.15, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4700767372104847111}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4532081436066891203
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,6 +1361,7 @@ Transform:
   - {fileID: 967193960319561619}
   - {fileID: 8621175474788892229}
   - {fileID: 4141718140755292519}
+  - {fileID: 3114891060183415442}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1385,35 +1416,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0, z: 0}
   localDirection: {x: 0, y: 0, z: 0}
-  WALK_SPEED: 0.7
+  WALK_SPEED: 0.8
   CROUCH_SPEED: 0.4
-  RUN_SPEED: 1.1
+  RUN_SPEED: 1.2
   AIR_SPEED: 0.2
   X_ACC: 3
   Z_ACC: 3
-  moveSpeed: 2.5
+  moveSpeed: 3
   speedLimit: 0.7
   speedMultiplyer: 0.7
   zSpeed: 0
   xSpeed: 0
-  initialRotation: 0
-  gravity: -12
+  gravity: -15
   groundDistance: 0.25
   groundOffset: 0.15
   groundMask:
     serializedVersion: 2
     m_Bits: 256
   velocity: {x: 0, y: 0, z: 0}
-  jumpVelocity: 13
+  jumpVelocity: 12
   isGrounded: 1
   previouslyGrounded: 1
   weapon: {fileID: 8990422987084575884}
-  runCost: 5
-  sprintCost: 0
-  sprintTimeLimit: 0
-  jumpCost: 0
-  airJumpCost: 0
-  staminaRecoveryRate: 2
+  runCost: 10
+  sprintCost: 20
+  sprintTimeLimit: 1
+  jumpCost: 15
+  airJumpCost: 25
+  attack1Cost: 15
+  attack2Cost: 25
+  staminaRecoveryRate: 10
 --- !u!136 &5525049309911673382
 CapsuleCollider:
   m_ObjectHideFlags: 0

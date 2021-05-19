@@ -23,7 +23,6 @@ public class ThridPersonController : MonoBehaviour
     [SerializeField] private float zSpeed = 0f;
     [SerializeField] private float xSpeed = 0f;
     private Vector2 turn;
-    [SerializeField] public float initialRotation;
     private Vector3 jumpDirection;
     private bool isMoving = false;
 
@@ -48,6 +47,8 @@ public class ThridPersonController : MonoBehaviour
 
     private bool attack1 = false;
     private bool attack2 = false;
+    private bool inAttack = false;
+
     bool stop;
 
     //private InterfaceController ui;
@@ -61,7 +62,13 @@ public class ThridPersonController : MonoBehaviour
     [SerializeField] public float sprintTimeLimit;
     [SerializeField] public float jumpCost;
     [SerializeField] public float airJumpCost;
+    [SerializeField] public float attack1Cost;
+    [SerializeField] public float attack2Cost;
     [SerializeField] public float staminaRecoveryRate;
+
+    private GameObject shoulder; 
+    private float lookUpLimit = 40.0f;
+    private float lookDownLimit = -30.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -70,17 +77,18 @@ public class ThridPersonController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         stop = false;
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
         turn.x = transform.rotation.eulerAngles.y;
-        maxStamina = (int) InterfaceController.Instance.max_stamina;
+        turn.y = 0f;
+        maxStamina = (int)InterfaceController.Instance.max_stamina;
         stamina = (int)InterfaceController.Instance.stamina;
         // ui = GameObject.Find("InterfaceCanvas").GetComponent<InterfaceController>();
         // stamina = 100f; 
         // ui.SetStamina(1f);
-
+        shoulder = transform.GetChild(3).gameObject;
         if (InterfaceController.Instance.start_menu.active)   //at the start of the game
         {
             ResumeMouseControl();    //open mouse control
@@ -106,90 +114,9 @@ public class ThridPersonController : MonoBehaviour
     {
         if (!stop)
         {
-            handlePlayerRotation();
-
-            if (isGrounded)
-            {
-                //print("on ground");
-                if (Input.GetKeyDown(KeyCode.LeftShift) && stamina >= 0)
-                {
-                    run = !run;
-                    crouch = false;
-                    if (run)
-                    {
-                        speedMultiplyer = RUN_SPEED;
-                        speedLimit = RUN_SPEED;
-                    }
-                    else
-                    {
-                        speedMultiplyer = WALK_SPEED;
-                        speedLimit = WALK_SPEED;
-                    }
-                }
-                else if (Input.GetKeyDown("c"))
-                {
-                    crouch = !crouch;
-                    run = false;
-                    if (crouch)
-                    {
-                        speedMultiplyer = CROUCH_SPEED;
-                        speedLimit = CROUCH_SPEED;
-                    }
-                    else
-                    {
-                        speedMultiplyer = WALK_SPEED;
-                        speedLimit = WALK_SPEED;
-                    }
-
-                }
-
-
-
-
-
-
-                // attack can only be performed on ground
-                if (Input.GetKeyDown(KeyCode.J))
-                {
-                    attack1 = true;
-                    weapon.changeAttack(1);
-                    Debug.Log("Attack 1!!");
-                }
-                else if (Input.GetKeyDown(KeyCode.K))
-                {
-                    attack2 = true;
-                    weapon.changeAttack(2);
-                    Debug.Log("Attack 2!!");
-                }
-                //else if(!(animator.GetCurrentAnimatorStateInfo(0).IsName("attack1")||
-                //     animator.GetCurrentAnimatorStateInfo(0).IsName("attack2"))){
-                //     weapon.changeAttack(0);
-                // }
-            }
-
-            if(stamina <= 100 && stamina >= 0){
-                if(run && isGrounded){
-                    Debug.Log("stamina decrease");
-                    stamina -= runCost * Time.deltaTime;
-                }else if(isGrounded){
-                    stamina += staminaRecoveryRate * Time.deltaTime;
-                }
-            }
-            
-            if(stamina > 100){
-                stamina = 100;
-            }else if(stamina < 0){
-                stamina = 0;
-                run = false;
-            }
-            
-
-            
             Move();
+
             updateAnimator();
-
-            
-
         }
     }
 
@@ -197,21 +124,14 @@ public class ThridPersonController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!stop){
-            
+        if (!stop)
+        {
+
             transform.rotation = Quaternion.Euler(0f, turn.x, 0);
-
-            //print("right feet: "+ animator.rightFeetBottomHeight + " left feet: " + animator.leftFeetBottomHeight);
-            moveDirection = new Vector3(xSpeed, 0, zSpeed);
-            moveDirection = transform.TransformDirection(moveDirection);
-
-            //print("after move velocity y is " + velocity.y);
-
+            shoulder.transform.rotation = Quaternion.Euler(-turn.y, turn.x, 0f);
             controller.Move(moveDirection * Time.deltaTime * moveSpeed + velocity * Time.deltaTime);
             //Debug.Log("stamina: "+stamina.ToString());
-            InterfaceController.Instance.SetStamina(stamina/maxStamina);
 
-            
         }
     }
 
@@ -222,14 +142,19 @@ public class ThridPersonController : MonoBehaviour
 
     void Move()
     {
-        
+
 
         isGrounded = (Physics.CheckSphere(transform.position + controller.center - new Vector3(0, controller.height / 2 - groundOffset, 0), groundDistance, groundMask)) || controller.isGrounded;
 
         //preserve momentem
-        localDirection = transform.InverseTransformDirection(moveDirection);
-        zSpeed = localDirection.z;
-        xSpeed = localDirection.x;
+        if(!inAttack){
+            localDirection = transform.InverseTransformDirection(moveDirection);
+            zSpeed = localDirection.z;
+            xSpeed = localDirection.x;
+        }
+        
+
+        handlePlayerRotation();
 
         //handle headbonk and on ground y velocity
         if (isGrounded && velocity.y < 0)
@@ -254,25 +179,28 @@ public class ThridPersonController : MonoBehaviour
 
 
         //start falling check
-        
+
 
         if (!isGrounded && fall >= 0f && velocity.y <= gravity * 0.15f)
         {
-            if((!controller.isGrounded)){
+            if ((!controller.isGrounded))
+            {
                 fall += Time.deltaTime;
                 print("fall frame count: " + fall);
             }
         }
 
-        if (previouslyGrounded != isGrounded && previouslyGrounded == true && velocity.y <=0)
+        if (previouslyGrounded != isGrounded && previouslyGrounded == true && velocity.y <= 0)
         {
             fall = 0f;
-        }else if(velocity.y > 0){
+        }
+        else if (velocity.y > 0)
+        {
             fall = -1f;
         }
 
         //possibility of falling
-        
+
 
         //record current gound status and y celocity
         previouslyGrounded = isGrounded;
@@ -288,16 +216,20 @@ public class ThridPersonController : MonoBehaviour
         {
             airJump = false;
 
-            if(speedMultiplyer == AIR_SPEED){
-                if(run){
+            if (speedMultiplyer == AIR_SPEED)
+            {
+                if (run)
+                {
                     speedLimit = RUN_SPEED;
                     speedMultiplyer = RUN_SPEED;
-                }else{
+                }
+                else
+                {
                     speedMultiplyer = WALK_SPEED;
                     speedLimit = WALK_SPEED;
                 }
             }
-            
+
             if (Input.GetButtonDown("Jump") && stamina >= jumpCost * 0.9)
             {
                 jumpDirection = transform.forward;
@@ -328,11 +260,11 @@ public class ThridPersonController : MonoBehaviour
                 speedLimit = RUN_SPEED;
                 crouch = false;
             }
-            
+
         }
         else if (!isGrounded && !airJump && stamina >= airJumpCost * 0.9)
         {
-            
+
             if (Input.GetButtonDown("Jump"))
             {
                 stamina -= airJumpCost;
@@ -357,118 +289,213 @@ public class ThridPersonController : MonoBehaviour
                     xSpeed += X_ACC * RUN_SPEED * 0.2f;
                 }
                 //animator.SetTrigger("Jump");
-                
+
             }
         }
 
 
-        
-
-        //handle  WASD inputs for SMOOTH 8way movement,
-        if (Input.GetKey(KeyCode.W))
+        if (isGrounded && !inAttack)
         {
-            isMoving = true;
-            if (!Input.GetKey(KeyCode.S))
+            //print("on ground");
+            if (Input.GetKeyDown(KeyCode.LeftShift) && stamina >= 0)
             {
-                zSpeed += Time.deltaTime * Z_ACC * speedMultiplyer;
-                if (zSpeed < 0 && isGrounded)
+                run = !run;
+                crouch = false;
+                if (run)
                 {
-                    zSpeed += 0.5f * Time.deltaTime * Z_ACC * speedMultiplyer;
+                    speedMultiplyer = RUN_SPEED;
+                    speedLimit = RUN_SPEED;
+                }
+                else
+                {
+                    speedMultiplyer = WALK_SPEED;
+                    speedLimit = WALK_SPEED;
                 }
             }
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            isMoving = true;
-            zSpeed -= Time.deltaTime * Z_ACC * speedMultiplyer;
-            if (zSpeed > 0 && isGrounded)
+            else if (Input.GetKeyDown("c"))
             {
-                zSpeed -= 0.5f * Time.deltaTime * Z_ACC * speedMultiplyer;
-            }
-        }
-        else if (Mathf.Abs(zSpeed) >= 0.05 * speedMultiplyer)
-        {
-            zSpeed += 0.5f * Time.deltaTime * Z_ACC * (zSpeed < 0 ? 1 : (-1)) * speedMultiplyer;
-            if(isGrounded){
-                zSpeed += 0.8f * Time.deltaTime * Z_ACC * (zSpeed < 0 ? 1 : (-1)) * speedMultiplyer;
-            }
-        }
-        else
-        {
-            zSpeed = 0;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            isMoving = true;
-            if (!Input.GetKey(KeyCode.D))
-            {
-                xSpeed -= Time.deltaTime * X_ACC * speedMultiplyer;
-                if (xSpeed > 0 && isGrounded)
+                crouch = !crouch;
+                run = false;
+                if (crouch)
                 {
-                    xSpeed -= 0.5f * Time.deltaTime * X_ACC * speedMultiplyer;
+                    speedMultiplyer = CROUCH_SPEED;
+                    speedLimit = CROUCH_SPEED;
                 }
+                else
+                {
+                    speedMultiplyer = WALK_SPEED;
+                    speedLimit = WALK_SPEED;
+                }
+
+            }else if(!run && !crouch){
+                speedMultiplyer = WALK_SPEED;
+                speedLimit = WALK_SPEED;
             }
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            isMoving = true;
-            xSpeed += Time.deltaTime * X_ACC * speedMultiplyer;
-            if (xSpeed < 0 && isGrounded)
+
+            // attack can only be performed on ground
+            if (Input.GetKeyDown(KeyCode.J) && stamina >= attack1Cost * 0.8f)
             {
-                xSpeed += 0.5f * Time.deltaTime * X_ACC * speedMultiplyer;
+                stamina -= attack1Cost;
+                attack1 = true;
+                weapon.changeAttack(1);
+                Debug.Log("Attack 1!!");
+                crouch = false;
             }
-        }
-        else if (Mathf.Abs(xSpeed) >= 0.05 * speedMultiplyer)
-        {
-            xSpeed += 0.5f * Time.deltaTime * X_ACC * (xSpeed < 0 ? 1 : (-1)) * speedMultiplyer;
-            if(isGrounded){
-                xSpeed += 0.8f * Time.deltaTime * X_ACC * (xSpeed < 0 ? 1 : (-1)) * speedMultiplyer;
-            }  
-        }
-        else
-        {
-            xSpeed = 0;
+            else if (Input.GetKeyDown(KeyCode.K) && stamina >= attack2Cost * 0.8f)
+            {
+                stamina -= attack2Cost;
+                attack2 = true;
+                weapon.changeAttack(2);
+                Debug.Log("Attack 2!!");
+                crouch = false;
+            }
+            //else if(!(animator.GetCurrentAnimatorStateInfo(0).IsName("attack1")||
+            //     animator.GetCurrentAnimatorStateInfo(0).IsName("attack2"))){
+            //     weapon.changeAttack(0);
+            // }
         }
 
-        if(!isMoving && run){
+        if (stamina <= 100 && stamina >= 0)
+        {
+            if (run && isGrounded)
+            {
+                Debug.Log("stamina decrease");
+                stamina -= runCost * Time.deltaTime;
+            }
+            else if (isGrounded && !inAttack)
+            {
+                //todo: stamina recover delay
+                stamina += staminaRecoveryRate * Time.deltaTime;
+            }
+        }
+
+        if (stamina > 100)
+        {
+            stamina = 100;
+        }
+        else if (stamina < 0)
+        {
+            stamina = 0;
             run = false;
         }
 
-        isMoving = false;
+        InterfaceController.Instance.SetStamina(stamina / maxStamina);
 
-        //handle speed limit problem,this could be done bofefore handling inputs performed both in air and on ground
-        if (zSpeed > speedLimit)
+        if (!inAttack)
         {
-            zSpeed = speedLimit;
-        }
-        else if (zSpeed < -speedLimit)
-        {
-            zSpeed = -speedLimit;
-        }
+            if (Input.GetKey(KeyCode.W))
+            {
+                isMoving = true;
+                if (!Input.GetKey(KeyCode.S))
+                {
+                    zSpeed += Time.deltaTime * Z_ACC * speedMultiplyer;
+                    if (zSpeed < 0 && isGrounded)
+                    {
+                        zSpeed += 0.5f * Time.deltaTime * Z_ACC * speedMultiplyer;
+                    }
+                }
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                isMoving = true;
+                zSpeed -= Time.deltaTime * Z_ACC * speedMultiplyer;
+                if (zSpeed > 0 && isGrounded)
+                {
+                    zSpeed -= 0.5f * Time.deltaTime * Z_ACC * speedMultiplyer;
+                }
+            }
+            else if (Mathf.Abs(zSpeed) >= 0.05 * speedMultiplyer)
+            {
+                zSpeed += 0.5f * Time.deltaTime * Z_ACC * (zSpeed < 0 ? 1 : (-1)) * speedMultiplyer;
+                if (isGrounded)
+                {
+                    zSpeed += 0.8f * Time.deltaTime * Z_ACC * (zSpeed < 0 ? 1 : (-1)) * speedMultiplyer;
+                }
+            }
+            else
+            {
+                zSpeed = 0;
+            }
 
-        if (xSpeed > speedLimit)
-        {
-            xSpeed = speedLimit;
+            if (Input.GetKey(KeyCode.A))
+            {
+                isMoving = true;
+                if (!Input.GetKey(KeyCode.D))
+                {
+                    xSpeed -= Time.deltaTime * X_ACC * speedMultiplyer;
+                    if (xSpeed > 0 && isGrounded)
+                    {
+                        xSpeed -= 0.5f * Time.deltaTime * X_ACC * speedMultiplyer;
+                    }
+                }
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                isMoving = true;
+                xSpeed += Time.deltaTime * X_ACC * speedMultiplyer;
+                if (xSpeed < 0 && isGrounded)
+                {
+                    xSpeed += 0.5f * Time.deltaTime * X_ACC * speedMultiplyer;
+                }
+            }
+            else if (Mathf.Abs(xSpeed) >= 0.05 * speedMultiplyer)
+            {
+                xSpeed += 0.5f * Time.deltaTime * X_ACC * (xSpeed < 0 ? 1 : (-1)) * speedMultiplyer;
+                if (isGrounded)
+                {
+                    xSpeed += 0.8f * Time.deltaTime * X_ACC * (xSpeed < 0 ? 1 : (-1)) * speedMultiplyer;
+                }
+            }
+            else
+            {
+                xSpeed = 0;
+            }
+
+            if (!isMoving && run)
+            {
+                run = false;
+            }
+
+            isMoving = false;
+            if (zSpeed > speedLimit)
+            {
+                zSpeed = speedLimit;
+            }
+            else if (zSpeed < -speedLimit)
+            {
+                zSpeed = -speedLimit;
+            }
+
+            if (xSpeed > speedLimit)
+            {
+                xSpeed = speedLimit;
+            }
+            else if (xSpeed < -speedLimit)
+            {
+                xSpeed = -speedLimit;
+            }
+            moveDirection = new Vector3(xSpeed, 0, zSpeed);
+            moveDirection = transform.TransformDirection(moveDirection);
         }
-        else if (xSpeed < -speedLimit)
-        {
-            xSpeed = -speedLimit;
-        }
+        
 
         velocity.y += gravity * Time.deltaTime;
 
         
-
         //stores the global direction of the move to preserve momentem
 
-       
+
     }
 
     void handlePlayerRotation()
     {
         turn.x += Input.GetAxis("Mouse X");
         turn.y += Input.GetAxis("Mouse Y");
+        if(turn.y>lookUpLimit){
+            turn.y = lookUpLimit;
+        }else if(turn.y<lookDownLimit){
+            turn.y = lookDownLimit;
+        }
         //TODO: look up and look down
 
     }
@@ -509,11 +536,22 @@ public class ThridPersonController : MonoBehaviour
         }
     }
 
-    public void attackLock(){
+    public void attackLock(Vector3 attackDirection, int attackType)
+    {
+        inAttack = true;
+        moveDirection = transform.TransformDirection(attackDirection);
+
+        if (attackType == 2)
+        {
+            moveDirection = transform.TransformDirection(new Vector3(xSpeed / 1.5f, 0f, attackDirection.z));
+        }
 
     }
 
-    public void attackUnlock(){
-        
+    public void attackUnlock()
+    {
+        inAttack = false;
+        moveDirection = moveDirection = transform.TransformDirection(new Vector3(xSpeed, 0, zSpeed));
+        localDirection = new Vector3(xSpeed, 0, zSpeed);
     }
 }
