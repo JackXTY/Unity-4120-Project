@@ -30,6 +30,7 @@ public class StartMenu : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
         ThridPersonController.Instance.DisableMouseControl();
+        InterfaceController.Instance.Dialogue("OK...... Hope this mission will be successful.");
 
     }
 }
