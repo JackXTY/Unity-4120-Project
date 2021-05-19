@@ -497,4 +497,12 @@ public class ThridPersonController : MonoBehaviour
             attack2 = false;
         }
     }
+
+    public void attackLock(){
+
+    }
+
+    public void attackUnlock(){
+        
+    }
 }
