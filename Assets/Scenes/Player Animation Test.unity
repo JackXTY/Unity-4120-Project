@@ -257,6 +257,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spanner
       objectReference: {fileID: 0}
+    - target: {fileID: 8982576598023489084, guid: cf0c9b8f67451ec4f93e1b7425e29bae,
+        type: 3}
+      propertyPath: initialPosition.x
+      value: 4.841848
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982576598023489084, guid: cf0c9b8f67451ec4f93e1b7425e29bae,
+        type: 3}
+      propertyPath: initialPosition.y
+      value: 2.055387
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982576598023489084, guid: cf0c9b8f67451ec4f93e1b7425e29bae,
+        type: 3}
+      propertyPath: initialPosition.z
+      value: 7.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982576598023489084, guid: cf0c9b8f67451ec4f93e1b7425e29bae,
+        type: 3}
+      propertyPath: initialRotation.y
+      value: 118
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982576598023489084, guid: cf0c9b8f67451ec4f93e1b7425e29bae,
+        type: 3}
+      propertyPath: initialRotation.z
+      value: 77
+      objectReference: {fileID: 0}
     - target: {fileID: 8982576598023489085, guid: cf0c9b8f67451ec4f93e1b7425e29bae,
         type: 3}
       propertyPath: m_RootOrder
@@ -1497,6 +1522,11 @@ PrefabInstance:
     - target: {fileID: 8331269424256164529, guid: cf2b6095718638b44a566cfc2a8905c4,
         type: 3}
       propertyPath: m_DefaultBlend.m_Style
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331269424552213940, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8331269424552213941, guid: cf2b6095718638b44a566cfc2a8905c4,

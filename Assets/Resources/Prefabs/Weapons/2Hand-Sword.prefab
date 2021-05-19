@@ -96,6 +96,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack1: 10
   attack2: 20
+  initialPosition: {x: 0.147, y: -0.068, z: 0.032}
+  initialRotation: {x: 12.135, y: 109.052, z: 233.423}
 --- !u!64 &3019073788577691107
 MeshCollider:
   m_ObjectHideFlags: 0

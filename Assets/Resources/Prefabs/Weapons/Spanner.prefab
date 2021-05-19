@@ -96,6 +96,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack1: 5
   attack2: 15
+  initialPosition: {x: 0.036, y: -0.017, z: -0.034}
+  initialRotation: {x: 0, y: 118, z: 77}
 --- !u!54 &6912877606225544981
 Rigidbody:
   m_ObjectHideFlags: 0
