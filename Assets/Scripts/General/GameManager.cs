@@ -36,6 +36,9 @@ public class GameManager : MonoBehaviour
                 ConsumeItem(item);
                 InterfaceController.Instance.Dialogue("Wow...... This thing is really great!");
                 break;
+            default:
+                InterfaceController.Instance.Dialogue("I better hold on to this.");
+                break;
         }
     }
 
