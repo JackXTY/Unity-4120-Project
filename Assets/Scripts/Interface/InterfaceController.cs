@@ -34,6 +34,7 @@ public class InterfaceController : MonoBehaviour
 
     public GameObject item_prefab;
     public List<GameObject> item_list;
+    public GameObject item_window;
 
     public bool in_settings;
     public bool in_game_menu;
@@ -139,6 +140,11 @@ public class InterfaceController : MonoBehaviour
             item_list.Clear();
         }
         Time.timeScale = 1;
+        if (item_window != null)
+        {
+            item_window.GetComponent<ItemPanel>().CloseWindow();
+            item_window = null;
+        }
     }
 
     public void OpenSettings()
@@ -152,6 +158,16 @@ public class InterfaceController : MonoBehaviour
         in_game_menu = true;
         InitializeGameMenu();
         OpenInterface();
+    }
+
+    public void NewItemWindow(GameObject window)
+    {
+        if(item_window != null)
+        {
+            item_window.GetComponent<ItemPanel>().CloseWindow();
+            item_window = null;
+        }
+        item_window = window;
     }
 
     public void InitializeGameMenu()

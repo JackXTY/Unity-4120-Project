@@ -22,5 +22,7 @@ public class ItemButton : MonoBehaviour
         GameObject temp = Instantiate(item_detail_panel, transform.parent);
         temp.GetComponent<ItemPanel>().item = item;
         temp.GetComponent<ItemPanel>().InitializeItemPanel();
+        InterfaceController.Instance.NewItemWindow(temp);
+
     }
 }
