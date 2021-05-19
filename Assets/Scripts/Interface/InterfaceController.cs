@@ -45,6 +45,9 @@ public class InterfaceController : MonoBehaviour
     public GameObject start_menu;
     public GameObject end_menu;
 
+    public GameObject dialogue;
+    Coroutine current_dialogue_sequence;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -59,6 +62,23 @@ public class InterfaceController : MonoBehaviour
         }
         InitializePlayerStats();
         
+    }
+
+    public void Dialogue(string sentence)
+    {
+        if(current_dialogue_sequence != null)
+        {
+            StopCoroutine(current_dialogue_sequence);
+        }
+        current_dialogue_sequence = StartCoroutine(DialogueSequence(sentence));
+    }
+
+    IEnumerator DialogueSequence(string sentence)
+    {
+        dialogue.GetComponent<Text>().text = sentence;
+        dialogue.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        dialogue.SetActive(false);
     }
 
     public void InitializePlayerStats()
@@ -379,7 +399,9 @@ public class InterfaceController : MonoBehaviour
         if(if_scratch){
             GameObject temp = Instantiate(scratch, damage_aura[0].transform.parent);
         }
-        
+
+        InterfaceController.Instance.Dialogue("Ouch! It hurts!");
+
     }
 
     public void Heal(float heal_point)
