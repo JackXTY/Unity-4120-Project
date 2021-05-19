@@ -18,12 +18,12 @@ public class EndMenu : MonoBehaviour
 
     IEnumerator EndGameSequence()
     {
-        background.GetComponent<FadeControl>().StartFadeIn();
+        GetComponent<FadeControl>().StartFadeIn();
         score_text.GetComponent<Text>().text = "<b>Score: " + InterfaceController.Instance.EndGameScore() + "</b>";
         yield return new WaitForSeconds(0.5f);
-        foreach(GameObject obj in elements)
-        {
-            obj.GetComponent<FadeControl>().StartFadeIn();
-        }
+        //foreach(GameObject obj in elements)
+        //{
+        //    obj.GetComponent<FadeControl>().StartFadeIn();
+        //}
     }
 }
