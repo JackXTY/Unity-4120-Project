@@ -17,3 +17,4 @@ MonoBehaviour:
   description: Using this can restore your stamina.
   usage: restore
   usage_value: 30
+  score: 5

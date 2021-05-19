@@ -115,5 +115,5 @@ MonoBehaviour:
   transparentFromStart: 0
   speed: 100
   current: 1
-  unscaledTime: 0
+  unscaledTime: 1
   debug: 0

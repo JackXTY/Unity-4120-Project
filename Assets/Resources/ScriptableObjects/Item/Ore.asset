@@ -17,3 +17,4 @@ MonoBehaviour:
   description: Ore that can only be found on another planet. Valuable.
   usage: collect
   usage_value: 50
+  score: 50

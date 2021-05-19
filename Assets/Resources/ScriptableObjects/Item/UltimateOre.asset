@@ -17,3 +17,4 @@ MonoBehaviour:
   description: Concentrated with the essence of many alien ores. Extremely valuable.
   usage: collect
   usage_value: 200
+  score: 200

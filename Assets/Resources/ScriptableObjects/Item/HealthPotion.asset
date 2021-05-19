@@ -17,3 +17,4 @@ MonoBehaviour:
   description: Using this should help with simple wounds.
   usage: heal
   usage_value: 15
+  score: 10

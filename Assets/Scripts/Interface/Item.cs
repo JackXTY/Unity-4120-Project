@@ -12,4 +12,6 @@ public class Item : ScriptableObject
     public string usage;
     public float usage_value;
 
+    public int score;
+
 }

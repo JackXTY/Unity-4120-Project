@@ -41,6 +41,9 @@ public class InterfaceController : MonoBehaviour
     public Image HPBarFill;
     public Image StaminaBarFill;
 
+    public GameObject start_menu;
+    public GameObject end_menu;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -54,6 +57,7 @@ public class InterfaceController : MonoBehaviour
             Destroy(gameObject);
         }
         InitializePlayerStats();
+        
     }
 
     public void InitializePlayerStats()
@@ -64,6 +68,21 @@ public class InterfaceController : MonoBehaviour
 
 
         SetInterfaceColor();
+    }
+
+    public int EndGameScore()
+    {
+        int score = 0;
+        if(health > 0)
+        {
+            score += 1000;
+            score += health;
+        }
+        foreach(Item item in GameManager.Instance.possessed_items)
+        {
+            score += item.score * GameManager.Instance.item_count[GameManager.Instance.possessed_items.IndexOf(item)];
+        }
+        return score;
     }
 
     [ContextMenu("OpenInterface")]
@@ -360,6 +379,15 @@ public class InterfaceController : MonoBehaviour
         
     }
 
+    public void Restore(float restore_point)
+    {
+        stamina += (int)restore_point;       
+        if (stamina > max_stamina) stamina = max_stamina;
+        ThridPersonController.Instance.SetStamina(stamina);
+
+        StaminaBarFill.GetComponent<BarChange>().ChangeTo((float)stamina / max_stamina);
+    }
+
     public void SetStamina(float percentage)
     {
 
@@ -391,6 +419,9 @@ public class InterfaceController : MonoBehaviour
     public void die()
     {
         Debug.Log("You have died!");
+        //Debug.Log(EndGameScore());
+        Time.timeScale = 0;
+        end_menu.GetComponent<EndMenu>().EndGame();
     }
 
     public void heal(int heal_point)

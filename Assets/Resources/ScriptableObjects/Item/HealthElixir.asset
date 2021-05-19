@@ -17,3 +17,4 @@ MonoBehaviour:
   description: Drinking this will magically recover most of your wounds.
   usage: heal
   usage_value: 50
+  score: 15

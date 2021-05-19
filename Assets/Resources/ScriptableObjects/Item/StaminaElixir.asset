@@ -17,3 +17,4 @@ MonoBehaviour:
   description: Drinking this will eliminate all tiredness.
   usage: restore
   usage_value: 100
+  score: 10
