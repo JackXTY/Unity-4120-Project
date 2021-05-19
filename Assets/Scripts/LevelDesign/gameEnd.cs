@@ -31,7 +31,7 @@ public class gameEnd : MonoBehaviour
         Vector3 heading;
         player = GameObject.FindGameObjectWithTag("Player");
         heading = player.transform.position - transform.position;
-        if (heading.sqrMagnitude < 0.4)
+        if (heading.sqrMagnitude < 0.4 && !end)
         {
             end = true;
             InterfaceController.Instance.end_menu.GetComponent<EndMenu>().EndGame();
