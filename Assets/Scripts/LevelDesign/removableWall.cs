@@ -14,12 +14,14 @@ public class removableWall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (lifePoint <= 0) 
+            Destroy(gameObject, 0.5F); 
     }
 
-    private void OnCollisionEnter(Collision otherObj)
+    private void OnTriggerEnter(Collider other)
 	{
-		if (otherObj.collider.tag == "Weapon")
+        Debug.Log(other.gameObject.tag);
+		if (other.gameObject.tag == "Weapon")
 		{
 			lifePoint -= 10;
 			if (lifePoint <= 0) 

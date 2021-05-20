@@ -1398,7 +1398,7 @@ CharacterController:
   m_Height: 1.75
   m_Radius: 0.4
   m_SlopeLimit: 45
-  m_StepOffset: 0.5
+  m_StepOffset: 0.6
   m_SkinWidth: 0.05
   m_MinMoveDistance: 0.005
   m_Center: {x: 0, y: 0.9, z: 0}
@@ -1419,7 +1419,7 @@ MonoBehaviour:
   WALK_SPEED: 0.8
   CROUCH_SPEED: 0.4
   RUN_SPEED: 1.2
-  AIR_SPEED: 0.2
+  AIR_SPEED: 0.15
   X_ACC: 5
   Z_ACC: 5
   moveSpeed: 4
@@ -1427,16 +1427,19 @@ MonoBehaviour:
   speedMultiplyer: 0.7
   zSpeed: 0
   xSpeed: 0
-  gravity: -15
+  gravity: -14
   groundDistance: 0.25
   groundOffset: 0.15
   groundMask:
     serializedVersion: 2
     m_Bits: 256
   velocity: {x: 0, y: 0, z: 0}
-  jumpVelocity: 12
+  jumpVelocity: 10
+  jumpDirectoinalBoost: 0.05
   isGrounded: 1
   previouslyGrounded: 1
+  airJump: 0
+  inAir: 0
   weapon: {fileID: 8990422987084575884}
   runCost: 10
   sprintCost: 20

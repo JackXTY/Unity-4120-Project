@@ -1574,7 +1574,7 @@ PrefabInstance:
     - target: {fileID: 8331269425970392662, guid: cf2b6095718638b44a566cfc2a8905c4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9000001
+      value: 1.7000003
       objectReference: {fileID: 0}
     - target: {fileID: 8331269425970392662, guid: cf2b6095718638b44a566cfc2a8905c4,
         type: 3}
@@ -1623,6 +1623,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
         type: 3}
+      propertyPath: airJump
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
       propertyPath: runCost
       value: 10
       objectReference: {fileID: 0}
@@ -1635,6 +1640,16 @@ PrefabInstance:
         type: 3}
       propertyPath: jumpCost
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: AIR_SPEED
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: isGrounded
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
         type: 3}
@@ -1680,6 +1695,11 @@ PrefabInstance:
         type: 3}
       propertyPath: staminaRecoveryRate
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: jumpDirectoinalBoost
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf2b6095718638b44a566cfc2a8905c4, type: 3}
