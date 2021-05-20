@@ -692,6 +692,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6543582, guid: a5cd29a93d7ae2d488fa0376d0d08462, type: 3}
+      propertyPath: m_Size.x
+      value: 3.6589646
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543582, guid: a5cd29a93d7ae2d488fa0376d0d08462, type: 3}
+      propertyPath: m_Size.y
+      value: 3.695941
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543582, guid: a5cd29a93d7ae2d488fa0376d0d08462, type: 3}
+      propertyPath: m_Size.z
+      value: 0.19458571
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543582, guid: a5cd29a93d7ae2d488fa0376d0d08462, type: 3}
+      propertyPath: m_Center.x
+      value: 0.09006315
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543582, guid: a5cd29a93d7ae2d488fa0376d0d08462, type: 3}
+      propertyPath: m_Center.y
+      value: 2.1520305
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543582, guid: a5cd29a93d7ae2d488fa0376d0d08462, type: 3}
+      propertyPath: m_Center.z
+      value: -0.0026963353
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5cd29a93d7ae2d488fa0376d0d08462, type: 3}
 --- !u!1001 &61273543
@@ -1644,11 +1668,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8331269424552213941, guid: cf2b6095718638b44a566cfc2a8905c4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: 0.08000004
       objectReference: {fileID: 0}
     - target: {fileID: 8331269424552213941, guid: cf2b6095718638b44a566cfc2a8905c4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 38.02
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 8331269424552213941, guid: cf2b6095718638b44a566cfc2a8905c4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2095,6 +2119,10 @@ PrefabInstance:
     - target: {fileID: 1105536548710841030, guid: 0727cb67283a7f84e8ac812dbde5b06f, type: 3}
       propertyPath: m_Name
       value: FallTrap_Ball (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369793122806266578, guid: 0727cb67283a7f84e8ac812dbde5b06f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7146871051849016114, guid: 0727cb67283a7f84e8ac812dbde5b06f, type: 3}
       propertyPath: m_Layer
@@ -2682,6 +2710,10 @@ PrefabInstance:
     - target: {fileID: 1105536548710841030, guid: 0727cb67283a7f84e8ac812dbde5b06f, type: 3}
       propertyPath: m_Name
       value: FallTrap_Ball (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369793122806266578, guid: 0727cb67283a7f84e8ac812dbde5b06f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7146871051849016114, guid: 0727cb67283a7f84e8ac812dbde5b06f, type: 3}
       propertyPath: m_Layer
@@ -7779,7 +7811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 444980, guid: b613f4d0dd5a33c429d212479c575885, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5.5
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 444980, guid: b613f4d0dd5a33c429d212479c575885, type: 3}
       propertyPath: m_LocalScale.y
@@ -7791,7 +7823,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 444980, guid: b613f4d0dd5a33c429d212479c575885, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.6
+      value: 5.36
       objectReference: {fileID: 0}
     - target: {fileID: 444980, guid: b613f4d0dd5a33c429d212479c575885, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7799,7 +7831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 444980, guid: b613f4d0dd5a33c429d212479c575885, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.34
+      value: 6.58
       objectReference: {fileID: 0}
     - target: {fileID: 444980, guid: b613f4d0dd5a33c429d212479c575885, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8576,6 +8608,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254255829}
   m_Mesh: {fileID: 4300000, guid: f3bf6b5a90134a44c9aa28b43b484d59, type: 3}
+--- !u!1 &1255295587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 135284, guid: a5cd29a93d7ae2d488fa0376d0d08462, type: 3}
+  m_PrefabInstance: {fileID: 57690688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1255295592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255295587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f71d4aa7ad254f1ca0df98740ae2196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifePoint: 40
 --- !u!1001 &1264915014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9482,6 +9532,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FallTrap_Ball
       objectReference: {fileID: 0}
+    - target: {fileID: 1105536548712689554, guid: 0727cb67283a7f84e8ac812dbde5b06f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7146871051849016114, guid: 0727cb67283a7f84e8ac812dbde5b06f, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -9673,6 +9727,10 @@ PrefabInstance:
     - target: {fileID: 1105536548710841030, guid: 0727cb67283a7f84e8ac812dbde5b06f, type: 3}
       propertyPath: m_Name
       value: FallTrap_Ball (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369793122806266578, guid: 0727cb67283a7f84e8ac812dbde5b06f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7146871051849016114, guid: 0727cb67283a7f84e8ac812dbde5b06f, type: 3}
       propertyPath: m_Layer
@@ -11525,7 +11583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f71d4aa7ad254f1ca0df98740ae2196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoint: 50
+  lifePoint: 40
 --- !u!1001 &1743811105
 PrefabInstance:
   m_ObjectHideFlags: 0
