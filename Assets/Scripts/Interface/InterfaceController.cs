@@ -241,7 +241,7 @@ public class InterfaceController : MonoBehaviour
         for (int i = 0; i <= 2; i++)
         {
             weapon_list[i].GetComponent<MoveTo>().startPosition = weapon_list[i].transform.localPosition;
-            weapon_list[i].GetComponent<MoveTo>().destination = weapon_list[i].transform.localPosition + Vector3.left * 120;
+            weapon_list[i].GetComponent<MoveTo>().destination = new Vector3(-120, -134, 0) + Vector3.right * 120 * (i + 1) + Vector3.left * 240;
             weapon_list[i].GetComponent<MoveTo>().ReplayMotion();
             if(i == 0)
             {
@@ -281,7 +281,7 @@ public class InterfaceController : MonoBehaviour
         for (int i = 0; i <= 2; i++)
         {
             weapon_list[i].GetComponent<MoveTo>().startPosition = weapon_list[i].transform.localPosition;
-            weapon_list[i].GetComponent<MoveTo>().destination = weapon_list[i].transform.localPosition + Vector3.right * 120;
+            weapon_list[i].GetComponent<MoveTo>().destination = new Vector3(-120, -134, 0) + Vector3.right * 120 * (i+1);
             weapon_list[i].GetComponent<MoveTo>().ReplayMotion();
             if (i == 0)
             {
