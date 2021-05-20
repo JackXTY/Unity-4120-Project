@@ -32,6 +32,7 @@ public class ThridPersonController : MonoBehaviour
     [SerializeField] public LayerMask groundMask;
     [SerializeField] private Vector3 velocity;
     [SerializeField] public float jumpVelocity;
+    [SerializeField] public float jumpDirectoinalBoost;
 
     [SerializeField] private bool isGrounded;
     private float fall = -1f;
@@ -41,7 +42,9 @@ public class ThridPersonController : MonoBehaviour
     private bool run = false;
     private bool sprint = false;
     private bool jump = false;
-    private bool airJump = false;
+    [SerializeField] private bool airJump = false;
+
+    [SerializeField] private bool inAir = false;
 
     private bool ascending = false;
 
@@ -236,34 +239,39 @@ public class ThridPersonController : MonoBehaviour
                 jumpDirection = transform.forward;
                 stamina -= jumpCost;
                 jump = true;
-                print("pressed jump");
+             
                 velocity.y = jumpVelocity;
+              
                 if (Input.GetKey(KeyCode.W))
                 {
-                    zSpeed += Z_ACC * WALK_SPEED * 0.2f;
+                    zSpeed += Z_ACC * WALK_SPEED * jumpDirectoinalBoost;
                 }
                 if (Input.GetKey(KeyCode.S))
                 {
-                    zSpeed -= Z_ACC * WALK_SPEED * 0.2f;
+                    zSpeed -= Z_ACC * WALK_SPEED * jumpDirectoinalBoost;
                 }
                 if (Input.GetKey(KeyCode.A))
                 {
-                    xSpeed -= Z_ACC * WALK_SPEED * 0.2f;
+                    xSpeed -= Z_ACC * WALK_SPEED * jumpDirectoinalBoost;
                 }
                 if (Input.GetKey(KeyCode.D))
                 {
-                    xSpeed += Z_ACC * WALK_SPEED * 0.2f;
+                    xSpeed += Z_ACC * WALK_SPEED * jumpDirectoinalBoost;
                 }
+        
+
                 //animator.SetTrigger("Jump");
                 isGrounded = false;
                 previouslyGrounded = false;
                 speedMultiplyer = AIR_SPEED;
                 speedLimit = RUN_SPEED;
                 crouch = false;
+
+                airLock();
             }
 
         }
-        else if (!isGrounded && !airJump && stamina >= airJumpCost * 0.9)
+        else if (inAir && !airJump && stamina >= airJumpCost * 0.9)
         {
 
             if (Input.GetButtonDown("Jump"))
@@ -277,30 +285,26 @@ public class ThridPersonController : MonoBehaviour
                 velocity.y = jumpVelocity;
                 if (Input.GetKey(KeyCode.W))
                 {
-                    zSpeed += X_ACC * RUN_SPEED * 0.2f;
+                    zSpeed += X_ACC * RUN_SPEED * jumpDirectoinalBoost;
                 }
                 if (Input.GetKey(KeyCode.S))
                 {
-                    zSpeed -= X_ACC * RUN_SPEED * 0.2f;
+                    zSpeed -= X_ACC * RUN_SPEED * jumpDirectoinalBoost;
                 }
                 if (Input.GetKey(KeyCode.A))
                 {
-                    xSpeed -= X_ACC * RUN_SPEED * 0.2f;
+                    xSpeed -= X_ACC * RUN_SPEED * jumpDirectoinalBoost;
                 }
                 if (Input.GetKey(KeyCode.D))
                 {
-                    xSpeed += X_ACC * RUN_SPEED * 0.2f;
+                    xSpeed += X_ACC * RUN_SPEED * jumpDirectoinalBoost;
                 }
-                //animator.SetTrigger("Jump");
-
+                
+                
             }
-        }else {
-            speedMultiplyer = AIR_SPEED;
-            speedLimit = RUN_SPEED;
         }
 
-
-        if (isGrounded && !inAttack && !jump)
+        if (isGrounded && !inAttack && !inAir)
         {
             //print("on ground");
             if (Input.GetKeyDown(KeyCode.LeftShift) && stamina >= 0)
@@ -361,7 +365,7 @@ public class ThridPersonController : MonoBehaviour
             // }
         }
 
-        if (stamina <= 100 && stamina >= 0)
+        if (stamina <= maxStamina && stamina >= 0)
         {
             if (run && isGrounded)
             {
@@ -375,9 +379,9 @@ public class ThridPersonController : MonoBehaviour
             }
         }
 
-        if (stamina > 100)
+        if (stamina > maxStamina)
         {
-            stamina = 100;
+            stamina = maxStamina;
         }
         else if (stamina < 0)
         {
@@ -508,7 +512,7 @@ public class ThridPersonController : MonoBehaviour
 
     void updateAnimator()
     {
-        if (fall > 0.2f)
+        if (fall > 0.15f)
         {
             print("falling");
             animator.SetTrigger("Fall");
@@ -517,7 +521,9 @@ public class ThridPersonController : MonoBehaviour
             speedMultiplyer = AIR_SPEED;
             speedLimit = RUN_SPEED;
             crouch = false;
+            airLock();
         }
+
         if (jump)
         {
             animator.SetTrigger("Jump");
@@ -559,5 +565,17 @@ public class ThridPersonController : MonoBehaviour
         inAttack = false;
         moveDirection = moveDirection = transform.TransformDirection(new Vector3(xSpeed, 0, zSpeed));
         localDirection = new Vector3(xSpeed, 0, zSpeed);
+    }
+
+    public void airLock(){
+        inAir = true;
+        speedMultiplyer = AIR_SPEED;
+        //print("airLock");
+    }
+
+    public void airUnlock(){
+        inAir = false;
+        airJump = false;
+        //print("airUnlock");
     }
 }
