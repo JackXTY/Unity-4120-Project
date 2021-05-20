@@ -2941,7 +2941,7 @@ PrefabInstance:
     - target: {fileID: 2419212759619814761, guid: 0dc6628415ed3184fa61d00390f96563, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1139469468}
     - target: {fileID: 2419212759619814761, guid: 0dc6628415ed3184fa61d00390f96563, type: 3}
       propertyPath: chasing
       value: 0
@@ -7599,6 +7599,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3a954679d4d04b49953424fc6bf526c, type: 3}
+--- !u!1 &1139469468 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8331269424552213940, guid: cf2b6095718638b44a566cfc2a8905c4, type: 3}
+  m_PrefabInstance: {fileID: 2141577101}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1156155930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10009,7 +10014,7 @@ PrefabInstance:
     - target: {fileID: 2419212759619814761, guid: 0dc6628415ed3184fa61d00390f96563, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1139469468}
     - target: {fileID: 2419212759619814761, guid: 0dc6628415ed3184fa61d00390f96563, type: 3}
       propertyPath: chasing
       value: 0
@@ -13958,7 +13963,7 @@ PrefabInstance:
     - target: {fileID: 2419212759619814761, guid: 0dc6628415ed3184fa61d00390f96563, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1139469468}
     - target: {fileID: 2419212759619814761, guid: 0dc6628415ed3184fa61d00390f96563, type: 3}
       propertyPath: chasing
       value: 0
