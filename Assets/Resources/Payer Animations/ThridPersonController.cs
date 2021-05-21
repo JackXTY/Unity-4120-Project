@@ -119,7 +119,7 @@ public class ThridPersonController : MonoBehaviour
         {
             Move();
 
-            updateAnimator();
+            
         }
     }
 
@@ -129,6 +129,7 @@ public class ThridPersonController : MonoBehaviour
     {
         if (!stop)
         {
+            updateAnimator();
 
             transform.rotation = Quaternion.Euler(0f, turn.x, 0);
             shoulder.transform.rotation = Quaternion.Euler(-turn.y, turn.x, 0f);
@@ -512,7 +513,7 @@ public class ThridPersonController : MonoBehaviour
 
     void updateAnimator()
     {
-        if (fall > 0.15f)
+        if (fall > 0.25f)
         {
             print("falling");
             animator.SetTrigger("Fall");

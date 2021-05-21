@@ -1420,23 +1420,23 @@ MonoBehaviour:
   CROUCH_SPEED: 0.4
   RUN_SPEED: 1.2
   AIR_SPEED: 0.15
-  X_ACC: 5
-  Z_ACC: 5
-  moveSpeed: 4
-  speedLimit: 0.7
-  speedMultiplyer: 0.7
+  X_ACC: 4
+  Z_ACC: 4
+  moveSpeed: 3.2
+  speedLimit: 0.8
+  speedMultiplyer: 0.8
   zSpeed: 0
   xSpeed: 0
-  gravity: -14
+  gravity: -13
   groundDistance: 0.25
   groundOffset: 0.15
   groundMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2816
   velocity: {x: 0, y: 0, z: 0}
-  jumpVelocity: 10
+  jumpVelocity: 8
   jumpDirectoinalBoost: 0.05
-  isGrounded: 1
+  isGrounded: 0
   previouslyGrounded: 1
   airJump: 0
   inAir: 0
