@@ -10,19 +10,18 @@ public class FloorButton : MonoBehaviour
 
     void Update()
     {
-    	GameObject player;
+        GameObject player;
         Vector3 heading;
         player = GameObject.FindGameObjectWithTag("Player");
         heading = player.transform.position - transform.position;
-        if (heading.sqrMagnitude < 0.2 && !touched)
+        if (heading.sqrMagnitude < 0.3 && !touched)
         {
         	puzzle.touch(index);
         	touched = true;
         }
-        else if (heading.sqrMagnitude > 0.2)
+        else if (heading.sqrMagnitude > 0.3)
         {
         	touched = false;
         }
     }
-
 }
