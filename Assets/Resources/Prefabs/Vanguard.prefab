@@ -1377,7 +1377,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 56a3a6073321a1b489651d6c843588db, type: 3}
   m_Controller: {fileID: 9100000, guid: 89835d4d173bbc54aa6dc640eae41dba, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -1400,7 +1400,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.6
   m_SkinWidth: 0.05
-  m_MinMoveDistance: 0.005
+  m_MinMoveDistance: 0.002
   m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &5095473857463431126
 MonoBehaviour:
@@ -1416,39 +1416,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0, z: 0}
   localDirection: {x: 0, y: 0, z: 0}
-  WALK_SPEED: 0.8
-  CROUCH_SPEED: 0.4
-  RUN_SPEED: 1.2
-  AIR_SPEED: 0.15
-  X_ACC: 4
-  Z_ACC: 4
-  moveSpeed: 3.2
-  speedLimit: 0.8
-  speedMultiplyer: 0.8
+  WALK_SPEED: 0.7
+  CROUCH_SPEED: 0.5
+  RUN_SPEED: 1.3
+  AIR_SPEED: 0.13
+  X_ACC: 3.5
+  Z_ACC: 3.5
+  moveSpeed: 3
+  speedLimit: 0.7
+  speedMultiplyer: 0.7
   zSpeed: 0
   xSpeed: 0
-  gravity: -13
+  gravity: -14
   groundDistance: 0.25
   groundOffset: 0.15
   groundMask:
     serializedVersion: 2
-    m_Bits: 2816
+    m_Bits: 2817
   velocity: {x: 0, y: 0, z: 0}
-  jumpVelocity: 8
-  jumpDirectoinalBoost: 0.05
+  jumpVelocity: 7
+  jumpDirectoinalBoost: 0.07
   isGrounded: 0
   previouslyGrounded: 1
   airJump: 0
   inAir: 0
   weapon: {fileID: 8990422987084575884}
   runCost: 10
-  sprintCost: 20
+  sprintCost: 15
   sprintTimeLimit: 1
   jumpCost: 15
   airJumpCost: 25
   attack1Cost: 15
   attack2Cost: 25
-  staminaRecoveryRate: 10
+  staminaRecoveryRate: 8
 --- !u!136 &5525049309911673382
 CapsuleCollider:
   m_ObjectHideFlags: 0
