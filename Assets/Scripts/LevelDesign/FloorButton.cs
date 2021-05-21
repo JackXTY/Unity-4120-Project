@@ -12,7 +12,7 @@ public class FloorButton : MonoBehaviour
     public FloorButtonPuzzle puzzle;
     private void OnTriggerEnter(Collider col){
         if (col.gameObject.tag == "Player"){
-            print("touching player");
+            //print("touching player");
             puzzle.touch(index);
         }
     }
