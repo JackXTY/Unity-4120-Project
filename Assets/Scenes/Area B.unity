@@ -3233,27 +3233,32 @@ PrefabInstance:
     - target: {fileID: 8331269424256164528, guid: cf2b6095718638b44a566cfc2a8905c4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: 0.65000135
       objectReference: {fileID: 0}
     - target: {fileID: 8331269424256164528, guid: cf2b6095718638b44a566cfc2a8905c4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6000004
+      value: 1.6999999
       objectReference: {fileID: 0}
     - target: {fileID: 8331269424256164528, guid: cf2b6095718638b44a566cfc2a8905c4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.5
+      value: -2.2999995
       objectReference: {fileID: 0}
     - target: {fileID: 8331269424256164529, guid: cf2b6095718638b44a566cfc2a8905c4,
         type: 3}
       propertyPath: m_UpdateMethod
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8331269424256164529, guid: cf2b6095718638b44a566cfc2a8905c4,
         type: 3}
       propertyPath: m_BlendUpdateMethod
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331269424256164535, guid: cf2b6095718638b44a566cfc2a8905c4,
+        type: 3}
+      propertyPath: field of view
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 8331269424552213940, guid: cf2b6095718638b44a566cfc2a8905c4,
         type: 3}
@@ -3328,32 +3333,7 @@ PrefabInstance:
     - target: {fileID: 8331269425970392662, guid: cf2b6095718638b44a566cfc2a8905c4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.5000002
-      objectReference: {fileID: 0}
-    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
-        type: 3}
-      propertyPath: gravity
-      value: -15
-      objectReference: {fileID: 0}
-    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9098352509074092440, guid: cf2b6095718638b44a566cfc2a8905c4,
-        type: 3}
-      propertyPath: jumpVelocity
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 9098352509074092441, guid: cf2b6095718638b44a566cfc2a8905c4,
-        type: 3}
-      propertyPath: m_StepOffset
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 9098352509074092441, guid: cf2b6095718638b44a566cfc2a8905c4,
-        type: 3}
-      propertyPath: m_MinMoveDistance
-      value: 0.001
+      value: -2.2999995
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf2b6095718638b44a566cfc2a8905c4, type: 3}

@@ -119,7 +119,7 @@ public class ThridPersonController : MonoBehaviour
         {
             Move();
 
-            updateAnimator();
+            
         }
     }
 
@@ -129,10 +129,14 @@ public class ThridPersonController : MonoBehaviour
     {
         if (!stop)
         {
+            updateAnimator();
 
             transform.rotation = Quaternion.Euler(0f, turn.x, 0);
             shoulder.transform.rotation = Quaternion.Euler(-turn.y, turn.x, 0f);
-            controller.Move(moveDirection * Time.deltaTime * moveSpeed + velocity * Time.deltaTime);
+            if(!inAttack){
+                controller.Move(moveDirection * Time.deltaTime * moveSpeed);
+            }
+            controller.Move(velocity * Time.deltaTime);
             //Debug.Log("stamina: "+stamina.ToString());
 
         }
@@ -264,7 +268,7 @@ public class ThridPersonController : MonoBehaviour
                 isGrounded = false;
                 previouslyGrounded = false;
                 speedMultiplyer = AIR_SPEED;
-                speedLimit = RUN_SPEED;
+                speedLimit = (RUN_SPEED + WALK_SPEED)/2;
                 crouch = false;
 
                 airLock();
@@ -277,7 +281,7 @@ public class ThridPersonController : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 speedMultiplyer = AIR_SPEED;
-                speedLimit = RUN_SPEED;
+                speedLimit = (RUN_SPEED + WALK_SPEED)/2;
                 stamina -= airJumpCost;
                 jump = true;
                 airJump = true;
@@ -512,14 +516,14 @@ public class ThridPersonController : MonoBehaviour
 
     void updateAnimator()
     {
-        if (fall > 0.15f)
+        if (fall > 0.25f)
         {
             print("falling");
             animator.SetTrigger("Fall");
             fall = -1f;
             jump = false;
             speedMultiplyer = AIR_SPEED;
-            speedLimit = RUN_SPEED;
+            speedLimit = (RUN_SPEED + WALK_SPEED)/2;
             crouch = false;
             airLock();
         }
@@ -558,6 +562,8 @@ public class ThridPersonController : MonoBehaviour
             moveDirection = transform.TransformDirection(new Vector3(xSpeed / 1.5f, 0f, attackDirection.z));
         }
 
+        animator.applyRootMotion = true;
+
     }
 
     public void attackUnlock()
@@ -565,11 +571,14 @@ public class ThridPersonController : MonoBehaviour
         inAttack = false;
         moveDirection = moveDirection = transform.TransformDirection(new Vector3(xSpeed, 0, zSpeed));
         localDirection = new Vector3(xSpeed, 0, zSpeed);
+
+        animator.applyRootMotion = false;
     }
 
     public void airLock(){
         inAir = true;
         speedMultiplyer = AIR_SPEED;
+        speedLimit = (RUN_SPEED + WALK_SPEED)/2;
         //print("airLock");
     }
 

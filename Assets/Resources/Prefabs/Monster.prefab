@@ -592,7 +592,7 @@ MonoBehaviour:
   walk_speed: 2
   FOV: 40
   close_attack_range: 1.5
-  player: {fileID: 0}
+  player: {fileID: 5365946220969596349, guid: 2bd4adafcd8e57545bc6173faea17dfc, type: 3}
   patrol: 1
   chasing: 0
   agent: {fileID: 0}
